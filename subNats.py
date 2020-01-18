@@ -16,9 +16,14 @@ async def run(loop):
 
     messages_received = 0
     async def message_handler(msg):
+        file = open("pos_data.txt", "a")
         positionModel = positionModel_pb2.State()
         positionModel.ParseFromString(msg.data)
         print(positionModel)
+        file.write("")
+        file.write(str(positionModel))
+        file.write("&\n")
+        file.close()
         nonlocal messages_received
         messages_received += 1
         print(messages_received)
@@ -28,7 +33,6 @@ async def run(loop):
     print("passed await")
 
     await asyncio.sleep(1)
-
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(run(loop))
