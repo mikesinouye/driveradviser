@@ -2,7 +2,7 @@ import asyncio
 from nats.aio.client import Client as NATS
 import positionModel_pb2
 
-async def example():
+async def run(loop):
     nc = NATS()
 
     async def error_cb(e):
@@ -11,28 +11,25 @@ async def example():
     await nc.connect("nats://hackaz.modularminingcloud.com:4222",
                      user_credentials='./hack.creds', #hack.creds should probably be gitignored from the repo
                      error_cb=error_cb,
+                     io_loop=loop,
                      )
 
-    future = asyncio.Future()
-
+    messages_received = 0
     async def message_handler(msg):
-        nonlocal future
-        future.set_result(msg)
         positionModel = positionModel_pb2.State()
         positionModel.ParseFromString(msg.data)
         print(positionModel)
-        print("got one")
+        nonlocal messages_received
+        messages_received += 1
+        print(messages_received)
 
 
-    sid = await nc.subscribe("single-scenario-easy-1", cb=message_handler)
+    sid = await nc.subscribe("multiple-scenarios-1", cb=message_handler)
     print("passed await")
 
-    msg = await asyncio.wait_for(future, 1)
-    await nc.auto_unsubscribe(sid, 3)
-    print("passed unsubscribe")
-    await nc.close()
+    await asyncio.sleep(1)
 
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(example())
-loop.close()
+loop.run_until_complete(run(loop))
+loop.run_forever()
