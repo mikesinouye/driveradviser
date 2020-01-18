@@ -4,6 +4,8 @@ import positionModel_pb2
 import time
 import sys
 import requests
+from python.car_modeling.Car import *
+
 
 debug_mode = True
 
@@ -38,7 +40,7 @@ async def run(loop, dataAddedCallback):
     async def error_cb(e):
         print("error:", e)
 
-    await nc.connect("nats://hackaz.modularminingcloud.com:4222",
+    await nc.connect("nats://hackaz.modularminingcloud.com:4222 ",
                      user_credentials='./hack.creds', #hack.creds should probably be gitignored from the repo
                      error_cb=error_cb,
                      io_loop=loop,
@@ -64,6 +66,11 @@ async def run(loop, dataAddedCallback):
         # outfile = open("pos_data_json.txt", "w")
         # outfile.write(DataPoints(positionModel, timestamp).to_json())
         # outfile.close()
+        car1 = Car(newdata.positionModel.OwnPosition.Latitude, newdata.positionModel.OwnPosition.Longitude,
+                   newdata.positionModel.OwnPosition.Heading, newdata.positionModel.OwnPosition.Velocity)
+        car2 = Car(newdata.positionModel.Target1Position.Latitude, newdata.positionModel.Target1Position.Longitude,
+                   newdata.positionModel.Target1Position.Heading, newdata.positionModel.Target1Position.Velocity)
+        car1.predict_collision(car1,car2)
         nonlocal messages_received
         messages_received += 1
         print(newdata.string_json())
