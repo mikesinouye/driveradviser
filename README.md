@@ -31,7 +31,7 @@ Frontend:
  Heatmat of crashes
 
 Dependencies:
-Python 3.6.5 or later
+Python 3.8 or later
 pip install:
 - asyncio-nats-client
 - nkeys
