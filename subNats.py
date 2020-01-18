@@ -53,7 +53,7 @@ async def run(loop, dataAddedCallback):
         # print(positionModel)
         # file.write("")
         # file.write(str(positionModel))
-        timestamp = time.time_ns()
+        timestamp = time.time()
         # file.write(str(timestamp))
         # file.write("\n")
         # file.write("&\n")
@@ -70,7 +70,7 @@ async def run(loop, dataAddedCallback):
         # print(messages_received)
 
 
-    sid = await nc.subscribe("multiple-scenarios-1", cb=message_handler)
+    sid = await nc.subscribe("multiple-scenarios-2", cb=message_handler)
     print("passed await")
 
     await asyncio.sleep(1)
