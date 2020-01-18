@@ -3,7 +3,7 @@ from nats.aio.client import Client as NATS
 import positionModel_pb2
 import time
 import sys
-import json
+import requests
 
 debug_mode = True
 
@@ -11,7 +11,7 @@ class DataPoints:
     def __init__(self, positionmodel, timestamp):
         self.positionModel = positionmodel
         self.timestamp = timestamp
-    def to_json(self):
+    def string_json(self):
         return ('{"timestamp": %s,\n "position_data": [\n\t{\n\t\t"latitude": %f,\n\t\t"longitude": %f,\n\t\t"altitude": %f,\n\t\t'
                 '"heading": %f,\n\t\t'
                 '"velocity": %f\n\t},\n\t{\n\t\t"latitude": %f,\n\t\t"longitude": %f,\n\t\t"altitude": %f,\n\t\t"heading": %f,\n\t\t'
@@ -66,7 +66,8 @@ async def run(loop, dataAddedCallback):
         # outfile.close()
         nonlocal messages_received
         messages_received += 1
-        print(newdata.to_json())
+        print(newdata.string_json())
+        requests.post(url="localhost:9190/data", data=newdata.string_json())
         # print(messages_received)
 
 
