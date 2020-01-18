@@ -1,7 +1,8 @@
 from subNats import *
 
-def dataReadyCallback():
-    pass
-
 posList = list()
-initPosCollection(posList, dataReadyCallback)
+
+def dataReadyCallback(dataPoint):
+    posList.append(dataPoint)
+
+initPosCollection(dataReadyCallback)

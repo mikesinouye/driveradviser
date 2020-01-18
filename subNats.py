@@ -10,7 +10,7 @@ class DataPoints:
         self.positionModel = positionmodel
         self.timestamp = timestamp
 
-async def run(loop):
+async def run(loop, dataAddedCallback):
     nc = NATS()
 
     async def error_cb(e):
@@ -36,6 +36,7 @@ async def run(loop):
         file.write("\n")
         file.write("&\n")
         file.close()
+        dataAddedCallback(DataPoints(positionModel, timestamp))
         positionList.append(DataPoints(positionModel, timestamp))
         with open("pos_data_json.txt", "a") as outfile:
             json.dump(positionlist, outfile)
@@ -50,7 +51,7 @@ async def run(loop):
 
     await asyncio.sleep(1)
 
-def initPosCollection(positionList, dataAddedCallback):
+def initPosCollection(dataAddedCallback):
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(run(loop))
+    loop.run_until_complete(run(loop, dataAddedCallback))
     loop.run_forever()
