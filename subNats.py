@@ -3,6 +3,13 @@ from nats.aio.client import Client as NATS
 import positionModel_pb2
 import time
 
+import json
+
+class DataPoints:
+    def __init__(self, positionmodel, timestamp):
+        self.positionModel = positionmodel
+        self.timestamp = timestamp
+
 async def run(loop):
     nc = NATS()
 
@@ -16,6 +23,7 @@ async def run(loop):
                      )
 
     messages_received = 0
+    positionList = []
     async def message_handler(msg):
         file = open("pos_data.txt", "a")
         positionModel = positionModel_pb2.State()
@@ -23,10 +31,15 @@ async def run(loop):
         print(positionModel)
         file.write("")
         file.write(str(positionModel))
-        file.write(str(time.time_ns()))
+        timestamp = time.time_ns()
+        file.write(str(timestamp))
         file.write("\n")
         file.write("&\n")
         file.close()
+        positionList.append(DataPoints(positionModel, timestamp))
+        with open("pos_data_json.txt", "a") as outfile:
+            json.dump(positionlist, outfile)
+        outfile.close()
         nonlocal messages_received
         messages_received += 1
         print(messages_received)

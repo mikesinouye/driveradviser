@@ -16038,3 +16038,2003 @@ Target1Position {
 }
 1579372956325210900
 &
+OwnPosition {
+  Latitude: 32.085660063999995
+  Longitude: -109.51183356199999
+  Altitude: 689.8569946
+  Heading: 359.999
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086384517
+  Longitude: -109.511183549
+  Altitude: 689.8569946
+  Heading: 231.892
+  Velocity: 4.2
+}
+1579373203922009100
+&
+OwnPosition {
+  Latitude: 32.085744472
+  Longitude: -109.512152191
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086281641999996
+  Longitude: -109.512733216
+  Altitude: 689.8570251
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373670138432100
+&
+OwnPosition {
+  Latitude: 32.085746781
+  Longitude: -109.512152191
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086281439
+  Longitude: -109.512730476
+  Altitude: 689.8569336
+  Heading: 95.0
+  Velocity: 4.1
+}
+1579373670171919900
+&
+OwnPosition {
+  Latitude: 32.085749096
+  Longitude: -109.512152191
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086281329
+  Longitude: -109.51272899899999
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373670272716200
+&
+OwnPosition {
+  Latitude: 32.085751409
+  Longitude: -109.512152191
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086281116
+  Longitude: -109.51272612000001
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.1
+}
+1579373670371539000
+&
+OwnPosition {
+  Latitude: 32.085752596
+  Longitude: -109.512152191
+  Altitude: 689.8570251
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086280904
+  Longitude: -109.512723254
+  Altitude: 689.8570557
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373670469977800
+&
+OwnPosition {
+  Latitude: 32.085754920999996
+  Longitude: -109.512152191
+  Altitude: 689.8570557
+  Heading: 0.003
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086280699
+  Longitude: -109.51272048700001
+  Altitude: 689.8570557
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373670570583200
+&
+OwnPosition {
+  Latitude: 32.085757283
+  Longitude: -109.512152191
+  Altitude: 689.8569946
+  Heading: 0.003
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.08628049
+  Longitude: -109.512717669
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.1
+}
+1579373670574127200
+&
+OwnPosition {
+  Latitude: 32.085759615
+  Longitude: -109.512152191
+  Altitude: 689.8569336
+  Heading: 0.003
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086280285
+  Longitude: -109.512714905
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.1
+}
+1579373670853115500
+&
+OwnPosition {
+  Latitude: 32.085761933
+  Longitude: -109.512152191
+  Altitude: 689.8569336
+  Heading: 0.003
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086280081
+  Longitude: -109.512712152
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373670875624600
+&
+OwnPosition {
+  Latitude: 32.085764248000004
+  Longitude: -109.51215219
+  Altitude: 689.8569336
+  Heading: 0.003
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086279878
+  Longitude: -109.51270940399999
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373670876902300
+&
+OwnPosition {
+  Latitude: 32.085766616
+  Longitude: -109.51215219
+  Altitude: 689.8570251
+  Heading: 0.002
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086279676
+  Longitude: -109.512706673
+  Altitude: 689.8569336
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373671077716900
+&
+OwnPosition {
+  Latitude: 32.085768941
+  Longitude: -109.51215219
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086279471
+  Longitude: -109.512703918
+  Altitude: 689.8569031
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373671180273800
+&
+OwnPosition {
+  Latitude: 32.085771283
+  Longitude: -109.51215219
+  Altitude: 689.8570557
+  Heading: 0.002
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086279269
+  Longitude: -109.512701188
+  Altitude: 689.8569641
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373671275279700
+&
+OwnPosition {
+  Latitude: 32.085773627
+  Longitude: -109.51215219
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086279064
+  Longitude: -109.512698416
+  Altitude: 689.8569336
+  Heading: 95.0
+  Velocity: 4.1
+}
+1579373671275279700
+&
+OwnPosition {
+  Latitude: 32.085776063
+  Longitude: -109.51215219
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086278954
+  Longitude: -109.512696929
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373671572430000
+&
+OwnPosition {
+  Latitude: 32.085778476
+  Longitude: -109.51215219
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086278752
+  Longitude: -109.51269421
+  Altitude: 689.8569336
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373671578855700
+&
+OwnPosition {
+  Latitude: 32.085780805
+  Longitude: -109.51215219
+  Altitude: 689.8569336
+  Heading: 0.003
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086278548
+  Longitude: -109.512691459
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.1
+}
+1579373671578855700
+&
+OwnPosition {
+  Latitude: 32.085781992
+  Longitude: -109.51215219
+  Altitude: 689.8569946
+  Heading: 0.003
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086278346
+  Longitude: -109.512688724
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373671878358900
+&
+OwnPosition {
+  Latitude: 32.085784422
+  Longitude: -109.512152189
+  Altitude: 689.8570557
+  Heading: 0.003
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.08627814
+  Longitude: -109.512685954
+  Altitude: 689.8570557
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373671881543500
+&
+OwnPosition {
+  Latitude: 32.085786741
+  Longitude: -109.512152189
+  Altitude: 689.8570862
+  Heading: 0.003
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086277937
+  Longitude: -109.512683208
+  Altitude: 689.8570557
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373671885338100
+&
+OwnPosition {
+  Latitude: 32.085789083
+  Longitude: -109.512152189
+  Altitude: 689.8570251
+  Heading: 0.003
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086277733
+  Longitude: -109.512680451
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373672185277900
+&
+OwnPosition {
+  Latitude: 32.085791417
+  Longitude: -109.512152189
+  Altitude: 689.8569641
+  Heading: 0.003
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086277519
+  Longitude: -109.512677568
+  Altitude: 689.8569946
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373672190441400
+&
+OwnPosition {
+  Latitude: 32.085793757000005
+  Longitude: -109.512152189
+  Altitude: 689.8569946
+  Heading: 0.003
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.08627732
+  Longitude: -109.51267488699999
+  Altitude: 689.8568726
+  Heading: 95.0
+  Velocity: 4.1
+}
+1579373672291241600
+&
+OwnPosition {
+  Latitude: 32.08579605
+  Longitude: -109.512152189
+  Altitude: 689.8568726
+  Heading: 0.003
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086277115
+  Longitude: -109.51267211099999
+  Altitude: 689.8569336
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373672293612900
+&
+OwnPosition {
+  Latitude: 32.085798391
+  Longitude: -109.512152189
+  Altitude: 689.8569336
+  Heading: 0.003
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086276904
+  Longitude: -109.51266927
+  Altitude: 689.8570251
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373672392573400
+&
+OwnPosition {
+  Latitude: 32.085800807
+  Longitude: -109.512152189
+  Altitude: 689.8569946
+  Heading: 0.003
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086276702
+  Longitude: -109.512666537
+  Altitude: 689.8570557
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373672697867300
+&
+OwnPosition {
+  Latitude: 32.085803143
+  Longitude: -109.512152188
+  Altitude: 689.8570251
+  Heading: 0.002
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086276489
+  Longitude: -109.512663667
+  Altitude: 689.8571167
+  Heading: 95.0
+  Velocity: 4.2
+}
+1579373672698867300
+&
+OwnPosition {
+  Latitude: 32.085805489
+  Longitude: -109.512152188
+  Altitude: 689.8571167
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086276386
+  Longitude: -109.512662279
+  Altitude: 689.8570557
+  Heading: 95.0
+  Velocity: 4.3
+}
+1579373672794868100
+&
+OwnPosition {
+  Latitude: 32.08580783
+  Longitude: -109.512152188
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086276174
+  Longitude: -109.51265941899999
+  Altitude: 689.8569031
+  Heading: 95.001
+  Velocity: 4.1
+}
+1579373672898575000
+&
+OwnPosition {
+  Latitude: 32.085810173
+  Longitude: -109.512152188
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086275971999996
+  Longitude: -109.51265668399999
+  Altitude: 689.8568726
+  Heading: 95.001
+  Velocity: 4.1
+}
+1579373672901444200
+&
+OwnPosition {
+  Latitude: 32.085812696
+  Longitude: -109.512152188
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086275767000004
+  Longitude: -109.512653925
+  Altitude: 689.8569641
+  Heading: 95.001
+  Velocity: 4.1
+}
+1579373672999871000
+&
+OwnPosition {
+  Latitude: 32.085813879
+  Longitude: -109.512152188
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086275556000004
+  Longitude: -109.512651066
+  Altitude: 689.8569946
+  Heading: 95.001
+  Velocity: 4.3
+}
+1579373673211818400
+&
+OwnPosition {
+  Latitude: 32.085816204
+  Longitude: -109.512152188
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086275354
+  Longitude: -109.512648347
+  Altitude: 689.8570251
+  Heading: 95.001
+  Velocity: 4.2
+}
+1579373673307652400
+&
+OwnPosition {
+  Latitude: 32.085818521
+  Longitude: -109.512152188
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086275148999995
+  Longitude: -109.51264558000001
+  Altitude: 689.8570862
+  Heading: 95.001
+  Velocity: 4.2
+}
+1579373673309168200
+&
+OwnPosition {
+  Latitude: 32.08566345
+  Longitude: -109.51183355200001
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.2
+}
+Target1Position {
+  Latitude: 32.086401281
+  Longitude: -109.511148196
+  Altitude: 689.8527832
+  Heading: 234.372
+  Velocity: 10.8
+}
+1579373693777221200
+&
+OwnPosition {
+  Latitude: 32.085669818
+  Longitude: -109.511833551
+  Altitude: 689.8567505
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086397829
+  Longitude: -109.51115421200001
+  Altitude: 689.8564148
+  Heading: 234.902
+  Velocity: 10.8
+}
+1579373693779864300
+&
+OwnPosition {
+  Latitude: 32.085676061
+  Longitude: -109.511833551
+  Altitude: 689.8566895
+  Heading: 0.002
+  Velocity: 11.2
+}
+Target1Position {
+  Latitude: 32.086394431
+  Longitude: -109.51116021899999
+  Altitude: 689.8601379
+  Heading: 235.361
+  Velocity: 11.0
+}
+1579373693995774400
+&
+OwnPosition {
+  Latitude: 32.085682446
+  Longitude: -109.511833551
+  Altitude: 689.8566589
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086390955
+  Longitude: -109.511166511
+  Altitude: 689.8617859
+  Heading: 235.839
+  Velocity: 11.1
+}
+1579373694080806900
+&
+OwnPosition {
+  Latitude: 32.085688663
+  Longitude: -109.51183354999999
+  Altitude: 689.85672
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086387552
+  Longitude: -109.51117273899999
+  Altitude: 689.8610229
+  Heading: 236.291
+  Velocity: 11.2
+}
+1579373694082902200
+&
+OwnPosition {
+  Latitude: 32.085694988
+  Longitude: -109.51183354999999
+  Altitude: 689.8568115
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.086384089
+  Longitude: -109.51117915
+  Altitude: 689.8589478
+  Heading: 236.706
+  Velocity: 11.3
+}
+1579373694178636900
+&
+OwnPosition {
+  Latitude: 32.085698158999996
+  Longitude: -109.51183354999999
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086380591
+  Longitude: -109.51118569500001
+  Altitude: 689.856781
+  Heading: 237.07
+  Velocity: 11.2
+}
+1579373694403940100
+&
+OwnPosition {
+  Latitude: 32.085704656
+  Longitude: -109.511833549
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.2
+}
+Target1Position {
+  Latitude: 32.086377131999996
+  Longitude: -109.511192227
+  Altitude: 689.8552551
+  Heading: 237.385
+  Velocity: 11.1
+}
+1579373694482123800
+&
+OwnPosition {
+  Latitude: 32.085711006000004
+  Longitude: -109.511833549
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086375446000005
+  Longitude: -109.51119543099999
+  Altitude: 689.8548584
+  Heading: 237.525
+  Velocity: 11.4
+}
+1579373694582258000
+&
+OwnPosition {
+  Latitude: 32.08571727
+  Longitude: -109.511833549
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 11.3
+}
+Target1Position {
+  Latitude: 32.086372142
+  Longitude: -109.511201745
+  Altitude: 689.8545837
+  Heading: 237.775
+  Velocity: 11.3
+}
+1579373694680895700
+&
+OwnPosition {
+  Latitude: 32.085723616
+  Longitude: -109.511833549
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 11.0
+}
+Target1Position {
+  Latitude: 32.086368836
+  Longitude: -109.511208106
+  Altitude: 689.8550415
+  Heading: 237.998
+  Velocity: 10.9
+}
+1579373694785489900
+&
+OwnPosition {
+  Latitude: 32.085729869000005
+  Longitude: -109.511833548
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086365642000004
+  Longitude: -109.511214384
+  Altitude: 689.8559265
+  Heading: 238.244
+  Velocity: 11.0
+}
+1579373694785489900
+&
+OwnPosition {
+  Latitude: 32.085736209000004
+  Longitude: -109.511833548
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.2
+}
+Target1Position {
+  Latitude: 32.086362595
+  Longitude: -109.51122087899999
+  Altitude: 689.8569641
+  Heading: 238.885
+  Velocity: 11.1
+}
+1579373694884137300
+&
+OwnPosition {
+  Latitude: 32.085742564
+  Longitude: -109.511833548
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086359637
+  Longitude: -109.51122746700001
+  Altitude: 689.857666
+  Heading: 239.822
+  Velocity: 11.1
+}
+1579373694988314100
+&
+OwnPosition {
+  Latitude: 32.085745762
+  Longitude: -109.51183354700001
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086356609999996
+  Longitude: -109.511234392
+  Altitude: 689.8579407
+  Heading: 240.816
+  Velocity: 10.9
+}
+1579373695085094200
+&
+OwnPosition {
+  Latitude: 32.085752477
+  Longitude: -109.51183354700001
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086353656
+  Longitude: -109.511241341
+  Altitude: 689.8577881
+  Heading: 241.706
+  Velocity: 11.4
+}
+1579373695321977900
+&
+OwnPosition {
+  Latitude: 32.085759073
+  Longitude: -109.51183354700001
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 11.2
+}
+Target1Position {
+  Latitude: 32.086352191
+  Longitude: -109.511244854
+  Altitude: 689.857605
+  Heading: 242.108
+  Velocity: 11.0
+}
+1579373695388260700
+&
+OwnPosition {
+  Latitude: 32.085765301
+  Longitude: -109.51183354599999
+  Altitude: 689.8568115
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.086349465
+  Longitude: -109.511251501
+  Altitude: 689.8572693
+  Heading: 242.78
+  Velocity: 11.2
+}
+1579373695389676700
+&
+OwnPosition {
+  Latitude: 32.085771451999996
+  Longitude: -109.51183354599999
+  Altitude: 689.8568115
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.086346807
+  Longitude: -109.511258093
+  Altitude: 689.8569031
+  Heading: 243.345
+  Velocity: 11.0
+}
+1579373695634983600
+&
+OwnPosition {
+  Latitude: 32.085777717
+  Longitude: -109.51183354599999
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.0
+}
+Target1Position {
+  Latitude: 32.086344133
+  Longitude: -109.511264819
+  Altitude: 689.8566284
+  Heading: 243.834
+  Velocity: 11.0
+}
+1579373695683874000
+&
+OwnPosition {
+  Latitude: 32.085784122999996
+  Longitude: -109.51183354599999
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.086341429
+  Longitude: -109.511271698
+  Altitude: 689.8564453
+  Heading: 244.258
+  Velocity: 11.2
+}
+1579373695685792200
+&
+OwnPosition {
+  Latitude: 32.085790367
+  Longitude: -109.511833545
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.2
+}
+Target1Position {
+  Latitude: 32.086338819
+  Longitude: -109.511278401
+  Altitude: 689.8564148
+  Heading: 244.608
+  Velocity: 11.2
+}
+1579373695942137100
+&
+OwnPosition {
+  Latitude: 32.085796627
+  Longitude: -109.511833545
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.0
+}
+Target1Position {
+  Latitude: 32.086336226
+  Longitude: -109.511285122
+  Altitude: 689.8564758
+  Heading: 244.909
+  Velocity: 10.9
+}
+1579373695988697400
+&
+OwnPosition {
+  Latitude: 32.085803013
+  Longitude: -109.511833545
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.086333599999996
+  Longitude: -109.51129198000001
+  Altitude: 689.8566895
+  Heading: 245.17
+  Velocity: 11.1
+}
+1579373695988697400
+&
+OwnPosition {
+  Latitude: 32.085806122
+  Longitude: -109.511833544
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 11.3
+}
+Target1Position {
+  Latitude: 32.086331059
+  Longitude: -109.511298666
+  Altitude: 689.8568726
+  Heading: 245.388
+  Velocity: 11.1
+}
+1579373696094138300
+&
+OwnPosition {
+  Latitude: 32.085812419
+  Longitude: -109.511833544
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 10.8
+}
+Target1Position {
+  Latitude: 32.086328502
+  Longitude: -109.51130543699999
+  Altitude: 689.8570557
+  Heading: 245.577
+  Velocity: 11.1
+}
+1579373696195965800
+&
+OwnPosition {
+  Latitude: 32.085818617
+  Longitude: -109.511833544
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.3
+}
+Target1Position {
+  Latitude: 32.086325918
+  Longitude: -109.511312313
+  Altitude: 689.8571472
+  Heading: 245.742
+  Velocity: 11.1
+}
+1579373696454961600
+&
+OwnPosition {
+  Latitude: 32.085824998
+  Longitude: -109.511833544
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.3
+}
+Target1Position {
+  Latitude: 32.086324663999996
+  Longitude: -109.511315665
+  Altitude: 689.8571472
+  Heading: 245.814
+  Velocity: 11.3
+}
+1579373696495951500
+&
+OwnPosition {
+  Latitude: 32.085831346999996
+  Longitude: -109.511833543
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086322101
+  Longitude: -109.51132253
+  Altitude: 689.8571167
+  Heading: 245.946
+  Velocity: 11.1
+}
+1579373696496542600
+&
+OwnPosition {
+  Latitude: 32.085837622
+  Longitude: -109.511833543
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086319576
+  Longitude: -109.51132932300001
+  Altitude: 689.8569641
+  Heading: 246.06
+  Velocity: 11.1
+}
+1579373696721126600
+&
+OwnPosition {
+  Latitude: 32.085843946
+  Longitude: -109.511833543
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086317037
+  Longitude: -109.51133617400001
+  Altitude: 689.8568115
+  Heading: 246.16
+  Velocity: 11.1
+}
+1579373696792933300
+&
+OwnPosition {
+  Latitude: 32.08585031
+  Longitude: -109.511833542
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 11.0
+}
+Target1Position {
+  Latitude: 32.086314489
+  Longitude: -109.51134306899999
+  Altitude: 689.8568115
+  Heading: 246.248
+  Velocity: 11.1
+}
+1579373696796871000
+&
+OwnPosition {
+  Latitude: 32.085856542
+  Longitude: -109.511833542
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.3
+}
+Target1Position {
+  Latitude: 32.086312001
+  Longitude: -109.51134982100001
+  Altitude: 689.856781
+  Heading: 246.324
+  Velocity: 11.1
+}
+1579373696901728700
+&
+OwnPosition {
+  Latitude: 32.085862771
+  Longitude: -109.511833542
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.08630952
+  Longitude: -109.511356569
+  Altitude: 689.856781
+  Heading: 246.392
+  Velocity: 10.9
+}
+1579373696995210500
+&
+OwnPosition {
+  Latitude: 32.085865992
+  Longitude: -109.511833542
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.3
+}
+Target1Position {
+  Latitude: 32.086307054
+  Longitude: -109.511363552
+  Altitude: 689.8568115
+  Heading: 246.576
+  Velocity: 11.2
+}
+1579373697275105000
+&
+OwnPosition {
+  Latitude: 32.085872387
+  Longitude: -109.511833542
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.0
+}
+Target1Position {
+  Latitude: 32.086304707
+  Longitude: -109.51137064000001
+  Altitude: 689.8568726
+  Heading: 247.116
+  Velocity: 11.1
+}
+1579373697275920300
+&
+OwnPosition {
+  Latitude: 32.085878918
+  Longitude: -109.511833541
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.0
+}
+Target1Position {
+  Latitude: 32.086303522
+  Longitude: -109.511374278
+  Altitude: 689.8568726
+  Heading: 247.438
+  Velocity: 11.1
+}
+1579373697298246900
+&
+OwnPosition {
+  Latitude: 32.085885481
+  Longitude: -109.511833541
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.2
+}
+Target1Position {
+  Latitude: 32.086301204
+  Longitude: -109.511381527
+  Altitude: 689.8568726
+  Heading: 248.074
+  Velocity: 11.2
+}
+1579373697398377500
+&
+OwnPosition {
+  Latitude: 32.085892068
+  Longitude: -109.511833541
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.086298927
+  Longitude: -109.51138882400001
+  Altitude: 689.8568726
+  Heading: 248.657
+  Velocity: 11.1
+}
+1579373697682985200
+&
+OwnPosition {
+  Latitude: 32.085898283
+  Longitude: -109.51183354000001
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086296818
+  Longitude: -109.51139572800001
+  Altitude: 689.8568726
+  Heading: 249.144
+  Velocity: 11.1
+}
+1579373697683988600
+&
+OwnPosition {
+  Latitude: 32.085904573
+  Longitude: -109.51183354000001
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086294718
+  Longitude: -109.511402731
+  Altitude: 689.8568726
+  Heading: 249.578
+  Velocity: 11.1
+}
+1579373697809357600
+&
+OwnPosition {
+  Latitude: 32.085910954
+  Longitude: -109.51183354000001
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.086292616
+  Longitude: -109.51140985
+  Altitude: 689.8568726
+  Heading: 249.964
+  Velocity: 11.1
+}
+1579373697900080100
+&
+OwnPosition {
+  Latitude: 32.085914136
+  Longitude: -109.51183354000001
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.2
+}
+Target1Position {
+  Latitude: 32.086290551000005
+  Longitude: -109.511416938
+  Altitude: 689.8569641
+  Heading: 250.304
+  Velocity: 11.1
+}
+1579373697998614500
+&
+OwnPosition {
+  Latitude: 32.085920339
+  Longitude: -109.511833539
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086288531
+  Longitude: -109.511423956
+  Altitude: 689.8569031
+  Heading: 250.604
+  Velocity: 11.1
+}
+1579373698100539400
+&
+OwnPosition {
+  Latitude: 32.085926751
+  Longitude: -109.511833539
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 10.9
+}
+Target1Position {
+  Latitude: 32.086287556
+  Longitude: -109.511427538
+  Altitude: 689.8569031
+  Heading: 250.803
+  Velocity: 11.2
+}
+1579373698101573300
+&
+OwnPosition {
+  Latitude: 32.085933027
+  Longitude: -109.511833539
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 11.1
+}
+Target1Position {
+  Latitude: 32.086284823
+  Longitude: -109.51143795
+  Altitude: 689.856842
+  Heading: 251.597
+  Velocity: 10.8
+}
+1579373698199056300
+&
+OwnPosition {
+  Latitude: 32.085939085999996
+  Longitude: -109.511833539
+  Altitude: 689.856842
+  Heading: 0.002
+  Velocity: 11.6
+}
+Target1Position {
+  Latitude: 32.086283922
+  Longitude: -109.51144146799999
+  Altitude: 689.856842
+  Heading: 251.872
+  Velocity: 11.3
+}
+1579373698503155500
+&
+OwnPosition {
+  Latitude: 32.085945308
+  Longitude: -109.51183353799999
+  Altitude: 689.8568726
+  Heading: 0.002
+  Velocity: 11.3
+}
+Target1Position {
+  Latitude: 32.08628215
+  Longitude: -109.511448512
+  Altitude: 689.8568115
+  Heading: 252.393
+  Velocity: 11.1
+}
+1579373698504295000
+&
+OwnPosition {
+  Latitude: 32.085910336000005
+  Longitude: -109.512343825
+  Altitude: 689.8569946
+  Heading: 39.999
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.085986649
+  Longitude: -109.512152164
+  Altitude: 689.8568726
+  Heading: 0.003
+  Velocity: 4.3
+}
+1579373880773528700
+&
+OwnPosition {
+  Latitude: 32.085912105000006
+  Longitude: -109.512342072
+  Altitude: 689.8569336
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.085989091
+  Longitude: -109.512152164
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.1
+}
+1579373880817887700
+&
+OwnPosition {
+  Latitude: 32.085913978
+  Longitude: -109.512340216
+  Altitude: 689.8570251
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.085990307
+  Longitude: -109.512152164
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373880917873600
+&
+OwnPosition {
+  Latitude: 32.085915773
+  Longitude: -109.512338437
+  Altitude: 689.8570557
+  Heading: 40.0
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.085992704
+  Longitude: -109.512152164
+  Altitude: 689.8570557
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373880919996100
+&
+OwnPosition {
+  Latitude: 32.085917632
+  Longitude: -109.512336595
+  Altitude: 689.8570862
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.085995141
+  Longitude: -109.512152164
+  Altitude: 689.8570862
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373881019400800
+&
+OwnPosition {
+  Latitude: 32.085918572
+  Longitude: -109.51233566299999
+  Altitude: 689.8570251
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.085997557
+  Longitude: -109.512152164
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373881286754400
+&
+OwnPosition {
+  Latitude: 32.085920400999996
+  Longitude: -109.51233385100001
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.085999944
+  Longitude: -109.512152163
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373881324581100
+&
+OwnPosition {
+  Latitude: 32.085922185
+  Longitude: -109.512332083
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086002424
+  Longitude: -109.512152163
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373881326572600
+&
+OwnPosition {
+  Latitude: 32.085924051
+  Longitude: -109.512330233
+  Altitude: 689.8568726
+  Heading: 40.0
+  Velocity: 4.1
+}
+Target1Position {
+  Latitude: 32.086004847
+  Longitude: -109.512152163
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 4.3
+}
+1579373881423961400
+&
+OwnPosition {
+  Latitude: 32.085925846
+  Longitude: -109.512328455
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086007301
+  Longitude: -109.512152163
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373881694160200
+&
+OwnPosition {
+  Latitude: 32.085927671
+  Longitude: -109.51232664700001
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086008502
+  Longitude: -109.512152163
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373881723300000
+&
+OwnPosition {
+  Latitude: 32.085929463
+  Longitude: -109.512324871
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086010939
+  Longitude: -109.512152163
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373881728235300
+&
+OwnPosition {
+  Latitude: 32.08593134
+  Longitude: -109.512323011
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086013365
+  Longitude: -109.512152163
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373882002248900
+&
+OwnPosition {
+  Latitude: 32.085933178
+  Longitude: -109.51232119000001
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086015790000005
+  Longitude: -109.512152163
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373882030942800
+&
+OwnPosition {
+  Latitude: 32.085935022
+  Longitude: -109.512319362
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086018149000004
+  Longitude: -109.512152163
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373882032492600
+&
+OwnPosition {
+  Latitude: 32.085935926000005
+  Longitude: -109.512318466
+  Altitude: 689.8570251
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086020502000004
+  Longitude: -109.512152162
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373882309599500
+&
+OwnPosition {
+  Latitude: 32.085937766
+  Longitude: -109.512316642
+  Altitude: 689.8570557
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086022887
+  Longitude: -109.512152162
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.1
+}
+1579373882330365700
+&
+OwnPosition {
+  Latitude: 32.085939614
+  Longitude: -109.512314812
+  Altitude: 689.8570557
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086025267
+  Longitude: -109.512152162
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373882332876000
+&
+OwnPosition {
+  Latitude: 32.085941397
+  Longitude: -109.512313044
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086027705
+  Longitude: -109.512152162
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.1
+}
+1579373882433351800
+&
+OwnPosition {
+  Latitude: 32.085943242
+  Longitude: -109.512311217
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086030087
+  Longitude: -109.512152162
+  Altitude: 689.8570251
+  Heading: 0.002
+  Velocity: 4.1
+}
+1579373882636323500
+&
+OwnPosition {
+  Latitude: 32.085945097
+  Longitude: -109.51230937800001
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086031305
+  Longitude: -109.512152162
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373882737069500
+&
+OwnPosition {
+  Latitude: 32.085946948
+  Longitude: -109.512307544
+  Altitude: 689.8569336
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086033731
+  Longitude: -109.512152162
+  Altitude: 689.8570557
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373882739593600
+&
+OwnPosition {
+  Latitude: 32.085948787
+  Longitude: -109.51230572099999
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.08603611
+  Longitude: -109.512152162
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373883027357700
+&
+OwnPosition {
+  Latitude: 32.085950626
+  Longitude: -109.512303899
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086038435999995
+  Longitude: -109.512152162
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373883037720800
+&
+OwnPosition {
+  Latitude: 32.085952469
+  Longitude: -109.512302072
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086040795
+  Longitude: -109.51215216099999
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 4.3
+}
+1579373883040509500
+&
+OwnPosition {
+  Latitude: 32.08595337
+  Longitude: -109.512301179
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086043147
+  Longitude: -109.51215216099999
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373883332432800
+&
+OwnPosition {
+  Latitude: 32.085955245
+  Longitude: -109.51229932099999
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086045506
+  Longitude: -109.51215216099999
+  Altitude: 689.8570251
+  Heading: 0.002
+  Velocity: 4.3
+}
+1579373883339372200
+&
+OwnPosition {
+  Latitude: 32.085957011
+  Longitude: -109.512297571
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086047862
+  Longitude: -109.51215216099999
+  Altitude: 689.8570557
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373883442601300
+&
+OwnPosition {
+  Latitude: 32.085958794
+  Longitude: -109.512295804
+  Altitude: 689.8569641
+  Heading: 39.999
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086050294
+  Longitude: -109.51215216099999
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373883443792600
+&
+OwnPosition {
+  Latitude: 32.085960639999996
+  Longitude: -109.51229397499999
+  Altitude: 689.8570557
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086052740999996
+  Longitude: -109.51215216099999
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373883740744600
+&
+OwnPosition {
+  Latitude: 32.085962497
+  Longitude: -109.512292134
+  Altitude: 689.8570557
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086053932999995
+  Longitude: -109.51215216099999
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.3
+}
+1579373884255441000
+&
+OwnPosition {
+  Latitude: 32.085964383000004
+  Longitude: -109.51229026499999
+  Altitude: 689.8569336
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086056274
+  Longitude: -109.51215216099999
+  Altitude: 689.8570251
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373884257249900
+&
+OwnPosition {
+  Latitude: 32.085966225
+  Longitude: -109.51228843999999
+  Altitude: 689.8569336
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086058705999996
+  Longitude: -109.51215216099999
+  Altitude: 689.8570557
+  Heading: 0.002
+  Velocity: 4.1
+}
+1579373884459620600
+&
+OwnPosition {
+  Latitude: 32.085967169
+  Longitude: -109.512287504
+  Altitude: 689.8569031
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086061131
+  Longitude: -109.51215216099999
+  Altitude: 689.8570557
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373884525522600
+&
+OwnPosition {
+  Latitude: 32.085969016
+  Longitude: -109.512285674
+  Altitude: 689.8569946
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086063467
+  Longitude: -109.51215216
+  Altitude: 689.8569641
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373884624858000
+&
+OwnPosition {
+  Latitude: 32.085970822
+  Longitude: -109.51228388400001
+  Altitude: 689.8570251
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.08606584
+  Longitude: -109.51215216
+  Altitude: 689.8569031
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373884626661800
+&
+OwnPosition {
+  Latitude: 32.085972647
+  Longitude: -109.51228207599999
+  Altitude: 689.8570557
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086068293
+  Longitude: -109.51215216
+  Altitude: 689.8569336
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373884871791800
+&
+OwnPosition {
+  Latitude: 32.085974507
+  Longitude: -109.512280232
+  Altitude: 689.8570557
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.08607074
+  Longitude: -109.51215216
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.3
+}
+1579373884925789600
+&
+OwnPosition {
+  Latitude: 32.085976364
+  Longitude: -109.51227839200001
+  Altitude: 689.8569641
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086073136
+  Longitude: -109.51215216
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373884929796400
+&
+OwnPosition {
+  Latitude: 32.085978217000005
+  Longitude: -109.512276556
+  Altitude: 689.8569336
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.08607434
+  Longitude: -109.51215216
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.2
+}
+1579373885277064000
+&
+OwnPosition {
+  Latitude: 32.085980015
+  Longitude: -109.51227477399999
+  Altitude: 689.8569031
+  Heading: 40.0
+  Velocity: 4.3
+}
+Target1Position {
+  Latitude: 32.086076781
+  Longitude: -109.51215216
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.1
+}
+1579373885282586400
+&
+OwnPosition {
+  Latitude: 32.085981852
+  Longitude: -109.512272953
+  Altitude: 689.8569336
+  Heading: 40.0
+  Velocity: 4.2
+}
+Target1Position {
+  Latitude: 32.086079208
+  Longitude: -109.51215216
+  Altitude: 689.8569946
+  Heading: 0.002
+  Velocity: 4.1
+}
+1579373885330106100
+&
