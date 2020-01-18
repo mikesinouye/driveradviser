@@ -29,12 +29,12 @@ app.use(function(req, res, next) {
 
 // Receive data from client by invoking GET /python
 app.get('/python', function(req,res){
-    console.log('recieved a POST request from client ' + req.ip)
+    console.log('received a request from client ' + req.ip)
 	logFile.write('hit');
 	
 	//Python test
 	var spawn = require("child_process").spawn;
-	var process = spawn('python',["../python/script.py"])
+	var process = spawn('python',["../python/active.py"])
 	
 	//Get printout from python script into data
 	process.stdout.on('data', function(data) { 
@@ -49,12 +49,16 @@ app.get('*', function(req, res){
   res.status(404).send('404');
 });
 
-function execute() {
+function intermittent() {
 	var spawn = require("child_process").spawn;
-	var process = spawn('python',["../python/script.py"])
-	console.log('ran python')
+	var process = spawn('python',["../python/intermittent.py"])
+	console.log('ran a intermittent python script')
 }
-setInterval(execute, 5000);
+setInterval(intermittent, 5000);
 
-app.listen(9190)
+app.listen(9190, function() {
+	var spawn = require("child_process").spawn;
+	var process = spawn('python',["../python/persistent.py"])
+	console.log('started persistent')
+});
 module.exports = app
