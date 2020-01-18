@@ -1,18 +1,18 @@
-{"timestamp": 1579381126290382400,
+{"timestamp": 1579387079403380800,
  "position_data": [
 	{
-		"latitude": 32.085593,
-		"longitude": -109.512372,
-		"altitude": 689.856964,
+		"latitude": 32.085737,
+		"longitude": -109.512310,
+		"altitude": 689.856873,
 		"heading": 20.000000,
-		"velocity": 4.200000
+		"velocity": 11.300000
 	},
 	{
-		"latitude": 32.085695,
+		"latitude": 32.085848,
 		"longitude": -109.512152,
-		"altitude": 689.856995,
-		"heading": 0.000000,
-		"velocity": 4.200000
+		"altitude": 689.856873,
+		"heading": 0.001000,
+		"velocity": 11.300000
 	}, 
 	{
 		"latitude": 0.000000,

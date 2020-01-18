@@ -32,6 +32,7 @@ Frontend:
 
 Dependencies:
 Python 3.8 or later
+ sudo apt-get install python3.8-dev
 pip install:
 - asyncio-nats-client
 - nkeys
