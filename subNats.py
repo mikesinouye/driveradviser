@@ -34,6 +34,7 @@ async def run(loop):
 
     await asyncio.sleep(1)
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(run(loop))
-loop.run_forever()
+def initPosCollection(positionList, dataAddedCallback):
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(run(loop))
+    loop.run_forever()
