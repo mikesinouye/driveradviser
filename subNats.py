@@ -2,8 +2,10 @@ import asyncio
 from nats.aio.client import Client as NATS
 import positionModel_pb2
 import time
-
+import sys
 import json
+
+debug_mode = True
 
 class DataPoints:
     def __init__(self, positionmodel, timestamp):
@@ -45,25 +47,27 @@ async def run(loop, dataAddedCallback):
     messages_received = 0
     positionList = []
     async def message_handler(msg):
-        file = open("pos_data.txt", "a")
+        # file = open("pos_data.txt", "a")
         positionModel = positionModel_pb2.State()
         positionModel.ParseFromString(msg.data)
-        print(positionModel)
-        file.write("")
-        file.write(str(positionModel))
+        # print(positionModel)
+        # file.write("")
+        # file.write(str(positionModel))
         timestamp = time.time_ns()
-        file.write(str(timestamp))
-        file.write("\n")
-        file.write("&\n")
-        file.close()
-        dataAddedCallback(DataPoints(positionModel, timestamp))
-        positionList.append(DataPoints(positionModel, timestamp))
-        outfile = open("pos_data_json.txt", "w")
-        outfile.write(DataPoints(positionModel, timestamp).to_json())
-        outfile.close()
+        # file.write(str(timestamp))
+        # file.write("\n")
+        # file.write("&\n")
+        # file.close()
+        newdata = DataPoints(positionModel, timestamp)
+        dataAddedCallback(newdata)
+        positionList.append(newdata)
+        # outfile = open("pos_data_json.txt", "w")
+        # outfile.write(DataPoints(positionModel, timestamp).to_json())
+        # outfile.close()
         nonlocal messages_received
         messages_received += 1
-        print(messages_received)
+        print(newdata.to_json())
+        # print(messages_received)
 
 
     sid = await nc.subscribe("multiple-scenarios-1", cb=message_handler)
