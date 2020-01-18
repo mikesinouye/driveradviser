@@ -16,6 +16,18 @@ class Car:
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
 
+
+    """
+    input heading (as degrees clockwise from north) and speed
+    return x_velocity (east direction as positive) and y_velocity (north direction as positive)
+    """
+    @staticmethod
+    def heading_conversion(heading, speed):
+        x_velocity = speed * np.sin((np.pi * heading)/180)
+        y_velocity = speed * np.cos((np.pi * heading) / 180)
+        return (x_velocity, y_velocity)
+
+
     """
     looks at the current state of the car, and returns parametric equations
     that model the cars predicted path
