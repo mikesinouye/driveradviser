@@ -9,6 +9,26 @@ class DataPoints:
     def __init__(self, positionmodel, timestamp):
         self.positionModel = positionmodel
         self.timestamp = timestamp
+    def to_json(self):
+        return ('{"timestamp": %s,\n "position_data": [\n\t{\n\t\t"latitude": %f,\n\t\t"longitude": %f,\n\t\t"altitude": %f,\n\t\t'
+                '"heading": %f,\n\t\t'
+                '"velocity": %f\n\t},\n\t{\n\t\t"latitude": %f,\n\t\t"longitude": %f,\n\t\t"altitude": %f,\n\t\t"heading": %f,\n\t\t'
+                '"velocity": %f\n\t}, \n\t'
+                '{\n\t\t"latitude": %f,\n\t\t"longitude": %f,\n\t\t"altitude": %f,\n\t\t"heading": %f,\n\t\t"velocity": %f}, \n\t'
+                '{\n\t\t"latitude": %f, \n\t\t'
+                '"longitude": %f,\n\t\t"altitude": %f,\n\t\t"heading": %f,\n\t\t"velocity": %f\n\t}\n\t]\n}'
+                %  (self.timestamp, self.positionModel.OwnPosition.Latitude, self.positionModel.OwnPosition.Longitude,
+                    self.positionModel.OwnPosition.Altitude, self.positionModel.OwnPosition.Heading,
+                    self.positionModel.OwnPosition.Velocity, self.positionModel.Target1Position.Latitude,
+                    self.positionModel.Target1Position.Longitude, self.positionModel.Target1Position.Altitude,
+                    self.positionModel.Target1Position.Heading, self.positionModel.Target1Position.Velocity,
+                    self.positionModel.Target2Position.Latitude,
+                    self.positionModel.Target2Position.Longitude, self.positionModel.Target2Position.Altitude,
+                    self.positionModel.Target2Position.Heading, self.positionModel.Target2Position.Velocity,
+                    self.positionModel.Target3Position.Latitude,
+                    self.positionModel.Target3Position.Longitude, self.positionModel.Target3Position.Altitude,
+                    self.positionModel.Target3Position.Heading, self.positionModel.Target3Position.Velocity,
+                    ))
 
 async def run(loop, dataAddedCallback):
     nc = NATS()
@@ -38,8 +58,8 @@ async def run(loop, dataAddedCallback):
         file.close()
         dataAddedCallback(DataPoints(positionModel, timestamp))
         positionList.append(DataPoints(positionModel, timestamp))
-        with open("pos_data_json.txt", "a") as outfile:
-            json.dump(positionlist, outfile)
+        outfile = open("pos_data_json.txt", "w")
+        outfile.write(DataPoints(positionModel, timestamp).to_json())
         outfile.close()
         nonlocal messages_received
         messages_received += 1
