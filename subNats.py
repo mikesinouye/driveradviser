@@ -1,6 +1,7 @@
 import asyncio
 from nats.aio.client import Client as NATS
 import positionModel_pb2
+import time
 
 async def run(loop):
     nc = NATS()
@@ -22,6 +23,8 @@ async def run(loop):
         print(positionModel)
         file.write("")
         file.write(str(positionModel))
+        file.write(str(time.time_ns()))
+        file.write("\n")
         file.write("&\n")
         file.close()
         nonlocal messages_received
