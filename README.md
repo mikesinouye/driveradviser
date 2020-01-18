@@ -29,3 +29,11 @@ Frontend:
  Dynamic/live line of prior path
  Dynamic/live line of predicted path
  Heatmat of crashes
+
+Dependencies:
+Python 3.6.5 or later
+pip install:
+- asyncio-nats-client
+- nkeys
+- protobuf
+- python3-protobuf

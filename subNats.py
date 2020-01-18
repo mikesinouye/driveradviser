@@ -1,5 +1,6 @@
 import asyncio
 from nats.aio.client import Client as NATS
+import positionModel_pb2
 
 async def example():
     nc = NATS()
@@ -8,7 +9,7 @@ async def example():
         print("error:", e)
 
     await nc.connect("nats://hackaz.modularminingcloud.com:4222",
-                     user_credentials='C:/Users/micha/PycharmProjects/HackAZ/venv/git//driveradviser/hack.creds',
+                     user_credentials='./hack.creds', #hack.creds should probably be gitignored from the repo
                      error_cb=error_cb,
                      )
 
@@ -17,6 +18,9 @@ async def example():
     async def message_handler(msg):
         nonlocal future
         future.set_result(msg)
+        positionModel = positionModel_pb2.State()
+        positionModel.ParseFromString(msg.data)
+        print(positionModel)
         print("got one")
 
 

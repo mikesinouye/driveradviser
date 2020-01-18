@@ -1,0 +1,19 @@
+syntax = "proto3";
+package demoposition;
+
+option csharp_namespace = "Position4All.DemoPublishingApp.Messages";
+
+message Position {
+    double Latitude = 1;
+    double Longitude = 2;
+    double Altitude = 3;
+    double Heading = 4;
+    double Velocity = 5;
+}
+
+message State {
+    Position OwnPosition = 1;
+    Position Target1Position = 2;
+    Position Target2Position = 3;
+    Position Target3Position = 4;
+}
