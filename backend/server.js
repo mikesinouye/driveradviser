@@ -11,6 +11,10 @@ var app = express()
 
 var logFile = fs.createWriteStream('requests.log', { flags: 'a' });
 var logStdout = process.stdout;
+var tick = 0
+var locationdata
+var spawnNATS = require("child_process").spawn;
+var processNATS = spawnNATS('python',["../main.py"])
 
 app.use(bodyParser.json({extended: true}))
 app.use('/', express.static('../frontend'))
@@ -43,6 +47,21 @@ app.get('/python', function(req,res){
 	
 })
 
+app.get('/update', function(req, res){
+    console.log("got a GET ping from the client");
+    //return res.status(200).json(JSON.parse(locationdata));
+	return res.status(200).json(locationdata);
+});
+
+app.post('/data', function(req, res){
+    console.log('received location data');
+	//console.log(req);
+    //console.log(JSON.stringify(req.body));
+	//logFile.write(req);
+	locationdata = req.body
+	res.send('')
+});
+
 // 404
 app.get('*', function(req, res){
   //res.redirect('/');
@@ -50,15 +69,28 @@ app.get('*', function(req, res){
 });
 
 function intermittent() {
+	tick = tick + 1
 	var spawn = require("child_process").spawn;
-	var process = spawn('python',["../python/intermittent.py"])
-	console.log('ran a intermittent python script')
+	var process = spawn('python', ["../python/intermittent.py", tick])
+	
+	process.stdout.on('data', function(data){
+		console.log('ran an intermittent python script, got: ')
+		console.log(data.toString())
+		locationdata = data.toString()
+	})
+
 }
-setInterval(intermittent, 5000);
+//setInterval(intermittent, 1000);
+
+function loadNATS() {
+	processNATS.kill()
+	spawnNATS = require("child_process").spawn;
+	processNATS = spawnNATS('python',["../main.py"])
+	console.log('begin NATS data collection')
+}
+setInterval(loadNATS, 5000);
 
 app.listen(9190, function() {
-	var spawn = require("child_process").spawn;
-	var process = spawn('python',["../python/persistent.py"])
-	console.log('started persistent')
+	loadNATS()
 });
 module.exports = app

@@ -2,93 +2,128 @@
 <html lang="en">
 
     <head>
-
-        <title>server</title>
+        <title>DriverAdviser</title>
         <link rel="shortcut icon" type="image/png" href="./assets/favicon.png" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="default server description">
-        <meta name="author" content="default authors">
+        <meta name="description" content="Predicts safe routes for vehicles using data-driven decision making.">
+        <meta name="author" content="Michael Inouye's Gamer Squadron">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="./css/styles.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+        <script src="./js/bundle.min.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+        <script src="./lib/Leaflet.heat-gh-pages/dist/leaflet-heat.js"></script>
+        <script type="text/javascript" src="./assets/uaheatmap.json"></script>
 
     </head>
 
     <body>
 
-		<!-- Header -->
-        <header id="header" class="header">
-            <div class="text-vertical-center">
-                <br /><br /><br /><br />
-                <h1>test</h1>
-                <h2>test</h2>
-                <a href="#about" class="btn btn-primary">Find Out More</a>
-            </div>
-        </header>
-		
-		<section id="about">
-			<div class="container">
-				<div class="row d-flex flex-wrap align-items-center">
-					<div class="col-md-6" style="text-align:center">
-						<br />
-						<h2>About Us</h2>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales velit sapien, at varius ex cursus at. Maecenas non velit tincidunt, ullamcorper nunc cursus, viverra ex. Vestibulum sit amet nunc sed libero imperdiet tempus. Sed porta euismod justo. Suspendisse potenti. Mauris sed purus vestibulum, condimentum urna eget, pharetra sapien. Nunc elementum lacinia tincidunt.
-							Aliquam lacinia sed neque a condimentum. Integer vestibulum ligula non justo tincidunt sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis, neque sit amet condimentum auctor, ipsum metus pharetra eros, at vulputate tortor nisl non ex. Quisque quis mi ligula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut at finibus erat. Ut scelerisque suscipit orci. Praesent malesuada dui nec felis congue, ut sagittis justo tempor. 
-						</p>
-					</div>
-					<div class="col-md-6" style="text-align:center">
-						<img style="width:80%; vertical-align:middle" src="">
-					</div>
-				</div>
-			</div>
-		</section>
-		
-		<section id="mission">
-			<div class="container">
-				<div class="row d-flex flex-wrap align-items-center">
-					<div class="col-md-6" style="text-align:center">
-						<img style="width:80%; vertical-align:middle" src="">
-					</div>
-					<div class="col-md-6" style="text-align:center">
-						<br />
-						<h2>Our Mission</h2>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sodales velit sapien, at varius ex cursus at. Maecenas non velit tincidunt, ullamcorper nunc cursus, viverra ex. Vestibulum sit amet nunc sed libero imperdiet tempus. Sed porta euismod justo. Suspendisse potenti. Mauris sed purus vestibulum, condimentum urna eget, pharetra sapien. Nunc elementum lacinia tincidunt.
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
+        <section>
+            <div id="mapid"></div>
+        </section>
 
-		<section id="control">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12" style="text-align:center">
-						<br />
-						<h2>Execute Script</h2>
-						<p></p>
-						<a href="./python" class="btn btn-primary">execute python</a>
-					</div>
-				</div>
-			</div>
-		</section>
-		
-		<!--Footer Section-->
-        <footer id="footer" class="footer">
+        <section id="fields">
             <div class="container">
                 <div class="row">
-					<div class="col-md-12">
-						<p style="margin-bottom:0px;">Copyright &copy; </p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="origination">Origination</label>
+                                <input type="text" class="form-control" id="origination" aria-describedby="" placeholder="Enter current location">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Destination</label>
+                                <input type="text" class="form-control" id="destination" placeholder="Enter destination">
+                            </div>
+                            <label for="mode">Route Mode</label>
+                            <select id="mode" class="form-control">
+                                <option>Daytime Crime</option>
+                                <option>Nighttime Crime</option>
+                                <option>Bike Accidents</option>
+                            </select>
+                            <div style="text-align:center;">
+                                <button type="submit" id="submit-button" class="btn btn-primary">Map Route</button>
+                                <button type="button" id="heat-button" class="btn btn-secondary">Crime Heat Map</button>
+                                <i id="loading" class="fa fa-refresh fa-spin"></i>
+                            </div>
+
+                        </div>
+                    <div class="col-md-6" style="text-align: center">
+                        <h1 style="margin-top:20px">DriverAdviser</h1>
+                        <p>Hack Arizona 2020 Submission, a webapp that predicts safe routes for vehicles using machine learning and data-driven decision making.</p>
+                        <p style="font-size:12px;">Collaboration by Rory Scobie, Michael Bullock, Noah Thurston, and Michael Inouye.</p>
+                        <p id="success"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+		
+		<div class="modal fade" id="serverSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">server Response:</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id ="serverMessage"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					</div>
                 </div>
             </div>
-        </footer>
+        </div>
+      
+        <div class="modal fade" id="serverError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">Que triste. Did the system time change, or is the server overloaded? </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addressError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">Could not resolve address within Tucson city limits.</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
 
     </body>
 	
