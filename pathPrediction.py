@@ -112,7 +112,8 @@ class PathPredictor:
             self.x_position = distance.distance(origin, (32.08595, longitude)).km
         """
         pointList = list()
-        for t in np.linspace(0, maxTime/3600, num=resolution):
+        #for t in np.linspace(0, maxTime/3600, num=resolution):
+        for t in [8/3600, 5/3600, 2/3600, 0/3600]:
             #find x,y at time based off of parametric equation
             x_eq, y_eq = self.latestCar.calculate_parametric_equations()
             x = x_eq[0] + x_eq[1]*t + 0.5*x_eq[2]*t*t
