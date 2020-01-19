@@ -395,10 +395,28 @@ class Car:
 
             print("coord: {}, {}".format(lat, lon))
 
-            return [4, x_intersection_time_1, [lat, lon]]
+            if x_intersection_time_1 < 1/3600:
+                return [4, x_intersection_time_1, [lat, lon]]
+            elif x_intersection_time_1 < 5/3600:
+                return [2, x_intersection_time_1, [lat, lon]]
+            elif x_intersection_time_1 < 8/3600:
+                return [1, x_intersection_time_1, [lat, lon]]
         else:
             print("\t\t ALL CLEAR")
             return [5, x_intersection_time_1]
+
+
+
+        #         if (x_intersection_time_1 < 1):
+        #             return [4, x_intersection_time_1, [x_collision_position, y_collision_position]]
+        #         elif x_intersection_time_1 < 5:
+        #             return [2, x_intersection_time_1, [x_collision_position, y_collision_position]]
+        #         elif x_intersection_time_1 < 8:
+        #             return [1, x_intersection_time_1, [x_collision_position, y_collision_position]]
+        #         else:
+        #             return [5, x_intersection_time_1]
+
+
 
         #
         # # check if both intersection times are non-negative
