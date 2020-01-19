@@ -118,7 +118,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
         nonlocal messages_received
         messages_received += 1
         if messages_received % 15 == 0:
-            x = alert_json(newdata,alert_list[0][0], 1) #TODO: change 1 to a different region
+            x = alert_json(newdata, alert_list[0][0], 1) #TODO: change 1 to a different region
             p = requests.post(url="https://hackaz.modularminingcloud.com/api/Alert", json=x)
             #print("posted")
         print(messages_received)
