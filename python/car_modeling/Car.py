@@ -360,7 +360,60 @@ class Car:
         # TODO: send collision coordinate
         if (np.abs(x_intersection_time_1-y_intersection_time_1) < INTERSECTION_TIME_MARGIN and x_intersection_time_1>0 and y_intersection_time_1>0):
             print("\t\t WE GONNA DIEEE")
-            return [4, x_intersection_time_1, [x_intersection_pos_1, y_intersection_pos_1]]
+
+            origin = (32.08595, -109.512)
+            miles_per_km = 0.621371
+            earth_radius = 3960.0
+            degrees_to_radians = math.pi / 180.0
+            radians_to_degrees = 180.0 / math.pi
+
+            def change_in_latitude(miles):
+                "Given a distance north, return the change in latitude."
+                return (miles / earth_radius) * radians_to_degrees
+
+            def change_in_longitude(latitude, miles):
+                "Given a latitude and a distance west, return the change in longitude."
+                # Find the radius of a circle around the earth at given latitude.
+                r = earth_radius * math.cos(latitude * degrees_to_radians)
+                return (miles / r) * radians_to_degrees
+
+
+            # find x,y at time based off of parametric equation
+            # x_eq, y_eq = self.latestCar.calculate_parametric_equations()
+            # x = x_eq[0] + x_eq[1] * t + 0.5 * x_eq[2] * t * t
+            x = x_intersection_pos_1
+
+            # y = y_eq[0] + y_eq[1] * t + 0.5 * y_eq[2] * t * t
+            y = y_intersection_pos_1
+
+            # convert back to lat/lon
+            d_lat = change_in_latitude(y * miles_per_km)
+            lat = d_lat + origin[0]
+            d_lon = change_in_longitude(lat, x * miles_per_km)
+            lon = d_lon + origin[1]
+
+
+            return pointList
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            return [4, x_intersection_time_1, [lat, lon]]
         else:
             print("\t\t ALL CLEAR")
             return [5, x_intersection_time_1]
