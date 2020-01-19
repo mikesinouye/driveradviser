@@ -111,7 +111,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
         # outfile.write(DataPoints(positionModel, timestamp).to_json())
         # outfile.close()
         # car1 = Car(newdata.positionModel.OwnPosition.Latitude, newdata.positionModel.OwnPosition.Longitude,
-        #            newdata.positionModel.OwnPosition.Heading, newdata.positionModel.OwnPosition.Velocity)
+        #        (    newdata.positionModel.OwnPosition.Heading, newdata.positionModel.OwnPosition.Velocity))
         # car2 = Car(newdata.positionModel.Target1Position.Latitude, newdata.positionModel.Target1Position.Longitude,
         #            newdata.positionModel.Target1Position.Heading, newdata.positionModel.Target1Position.Velocity)
         # car1.predict_collision(car1, car2)
