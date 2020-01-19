@@ -26,17 +26,43 @@ class PathPredictor:
         self.predictions = list()
         self.latestTime = 0
         self.timeRecordLength = 8
-        self.latestCar = Car
+        self.latestCar = Car(0,0,0,0)
+
+    def predictParams(self):
+        # just return avg velocity, acceleration for now
+        if len(self.positions) == 0:
+            print("ERROR: queue shouldn't be empty")
+            return (0, 0)
+        elif len(self.positions) == 1:
+            return (0, 0)
+        else:
+            # remove old datapoints
+            self.positions = [pos for pos in self.positions if self.latestTime - pos.timeStamp < 8]
+            print()
+
+            # xVelocitySum = 0
+            # yVelocitySum = 0
+            xAccelerationSum = 0
+            yAccelerationSum = 0
+            size = len(self.positions)
+            for i in range(size):
+                # xVelocitySum += self.positions[i].Car.x_velocity
+                # yVelocitySum += self.positions[i].Car.y_velocity
+                if i != 0:
+                    xAccelerationSum += self.positions[i].car.x_velocity - self.positions[i - 1].car.x_velocity
+                    yAccelerationSum += self.positions[i].car.y_velocity - self.positions[i - 1].car.y_velocity
+
+            return ((xAccelerationSum / (size - 1)), (yAccelerationSum / (size - 1)))
 
     def addData(self, positionData, timeStamp):
         """
         add new data to use
         """
-        newPos = positionData(positionData, timeStamp)
+        newPos = IndividualPosition(positionData, timeStamp)
         self.positions.append(newPos)
-        self.predictedXAcceleration, self.predictedYAcceleration, = predictParams()
-        newPos.car.update_predictions(predictParams())
-        latestCar = newPos()
+        self.predictedXAcceleration, self.predictedYAcceleration = self.predictParams()
+        newPos.car.update_predictions(self.predictedXAcceleration, self.predictedYAcceleration)
+        latestCar = newPos.car
         self.latestTime = timeStamp
 
     def predictPath(self):
@@ -56,28 +82,3 @@ class PathPredictor:
         """
         pass
 
-    def predictParams(self):
-        #just return avg velocity, acceleration for now
-        if len(self.positions == 0):
-            print("ERROR: queue shouldn't be empty")
-            return (0,0)
-        elif len(self.positions == 1):
-            return (0, 0)
-        else:
-            #remove old datapoints
-            self.positions = [self.latestTime - pos.timeStamp < 8 for pos in self.positions]
-
-            # xVelocitySum = 0
-            # yVelocitySum = 0
-            xAccelerationSum = 0
-            yAccelerationSum = 0
-            size = len(self.positions)
-            for i in range(size):
-                # xVelocitySum += self.positions[i].Car.x_velocity
-                # yVelocitySum += self.positions[i].Car.y_velocity
-                if i != 0:
-                    xAccelerationSum += self.positions[i].Car.x_velocity - self.positions[i - 1].Car.x_velocity
-                    yAccelerationSum += self.positions[i].Car.y_velocity - self.positions[i - 1].Car.y_velocity
-            
-            return (xAccelerationSum/(size-1), yAccelerationSum/(size-1))
-                

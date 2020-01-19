@@ -66,7 +66,7 @@ class Car:
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
     
-    def update_predictions(predicted_x_acceleration, predicted_y_acceleration):
+    def update_predictions(self, predicted_x_acceleration, predicted_y_acceleration):
         self.predicted_x_acceleration = predicted_x_acceleration
         self.predicted_y_acceleration = predicted_y_acceleration
 
@@ -84,23 +84,31 @@ class Car:
             x_intersection_time_1 = np.inf
             x_intersection_time_2 = np.inf
         else:
-            a = car1_x_eq[0], b = car1_x_eq[1], c = car1_x_eq[2]
-            d = car2_x_eq[0], e = car2_x_eq[1], f = car2_x_eq[2]
+            a = car1_x_eq[0]
+            b = car1_x_eq[1]
+            c = car1_x_eq[2]
+            d = car2_x_eq[0]
+            e = car2_x_eq[1]
+            f = car2_x_eq[2]
             #x_intersection_time_1 = (car2_x_eq[0]-car1_x_eq[0]) / (car1_x_eq[1]-car2_x_eq[1] + EPSILON)
-            x_intersection_time_1 = (-1*(b - e) + np.sqrt((b - e)**2 - 4*(a - d)*(c - f)))/(2*(a - d))
-            x_intersection_time_2 = (-1*(b - e) - np.sqrt((b - e)**2 - 4*(a - d)*(c - f)))/(2*(a - d))
+            x_intersection_time_1 = (-1*(b - e) + np.sqrt((b - e)**2 - 4*(a - d)*(c - f)))/(2*(a - d) + EPSILON)
+            x_intersection_time_2 = (-1*(b - e) - np.sqrt((b - e)**2 - 4*(a - d)*(c - f)))/(2*(a - d) + EPSILON)
 
         # check if the cars have the same y position and same y velocity and acceleration
-        if (car1_y_eq[0] == car2_y_eq[0]) and (car1_y_eq[1] == car2_y_eq[1]) and (car1_y_eq[1] == car2_y_eq[1]):
+        if (car1_y_eq[0] == car2_y_eq[0]) and (car1_y_eq[1] == car2_y_eq[1]) and (car1_y_eq[2] == car2_y_eq[2]):
             # using np.inf to represent that there are infinite y_intersection times
             y_intersection_time_1 = np.inf
             y_intersection_time_2 = np.inf
         else:
-            a = car1_y_eq[0], b = car1_y_eq[1], c = car1_y_eq[2]
-            d = car2_y_eq[0], e = car2_y_eq[1], f = car2_y_eq[2]
+            a = car1_y_eq[0]
+            b = car1_y_eq[1]
+            c = car1_y_eq[2]
+            d = car2_y_eq[0]
+            e = car2_y_eq[1]
+            f = car2_y_eq[2]
             #y_intersection_time = (car2_y_eq[0]-car1_y_eq[0]) / (car1_y_eq[1]-car2_y_eq[1] + EPSILON)
-            y_intersection_time_1 = (-1*(b - e) + np.sqrt((b - e)**2 - 4*(a - d)*(c - f)))/(2*(a - d))
-            y_intersection_time_2 = (-1*(b - e) - np.sqrt((b - e)**2 - 4*(a - d)*(c - f)))/(2*(a - d))
+            y_intersection_time_1 = (-1*(b - e) + np.sqrt((b - e)**2 - 4*(a - d)*(c - f)))/(2*(a - d) + EPSILON)
+            y_intersection_time_2 = (-1*(b - e) - np.sqrt((b - e)**2 - 4*(a - d)*(c - f)))/(2*(a - d) + EPSILON)
 
         print("x_intersection_time_1: {}".format(x_intersection_time_1))
         print("y_intersection_time_1: {}".format(y_intersection_time_1))
