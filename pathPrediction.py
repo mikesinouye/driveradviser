@@ -28,7 +28,7 @@ class PathPredictor:
         self.predictions = list()
         self.latestTime = 0
         self.timeRecordLength = 8
-        self.latestCar = Car(0,0,0,0) #TODO: make this None and handle elsewhere
+        self.latestCar = None
 
     def predictParams(self):
         # just return avg velocity, acceleration for now
@@ -68,6 +68,8 @@ class PathPredictor:
         self.latestTime = timeStamp
 
     def predictPath(self, maxTime, resolution):
+        if (self.latestCar == None):
+            return [] #return nothing if no cars yet
         """
         - Predict path based off past path change.
         - Treat each datapoint as vector. compute change in angle,
