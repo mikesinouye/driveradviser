@@ -3,7 +3,7 @@ import math
 from geopy import distance
 # very small number so we dont divide by 0
 EPSILON = 10**-6
-INTERSECTION_TIME_MARGIN = 1
+INTERSECTION_TIME_MARGIN = 2/3600
 NEAR_MISS_MULTIPLIER = 8
 
 
@@ -394,6 +394,11 @@ class Car:
             lon = d_lon + origin[1]
 
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 80a083135049ce5c11a171a75acfb13e21cc03f5
 
 
 
@@ -410,8 +415,7 @@ class Car:
 
 
 
-
-
+            print("coord: {}, {}".format(lat, lon))
 
             return [4, x_intersection_time_1, [lat, lon]]
         else:
