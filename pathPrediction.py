@@ -2,7 +2,7 @@ from subNats import *
 from geopy import distance
 import sys
 sys.path.append('python/car_modeling')
-from Car import *
+from python.car_modeling.Car import *
 import math
 #from python.car_modeling.Car import *
 """
