@@ -1,10 +1,15 @@
 import time
+import requests
 
-
-count = 0
 while True :
-	time.sleep(5)
-	file = open("persistent.txt", "a")
-	file.write("executed persistent python at time " + str(count) + "\n")
-	count = count + 1
-	file.close()
+	time.sleep(1)
+	try :
+		r = requests.post(url="http://localhost:9190/data", data="hello")
+		print(r.text)
+		file = open("persistent.txt", "a")
+		file.write(r.text + "\n")
+		file.close()
+	except: 
+		file = open("persistent.txt", "a")
+		file.write("failed" + "\n")
+		file.close()

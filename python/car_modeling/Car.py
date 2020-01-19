@@ -22,8 +22,14 @@ class Car:
         # 0 longitude is -109.512
         # 0 latitude is 32.08595
         origin = (32.08595, -109.512)
-        self.y_position = distance.distance(origin, (latitude, -109.512)).km
-        self.x_position = distance.distance(origin, (32.08595, longitude)).km
+        if latitude < 32.08595:
+            self.y_position = -(distance.distance(origin, (latitude, -109.512)).km)
+        else:
+            self.y_position = -(distance.distance(origin, (latitude, -109.512)).km)
+        if longitude < -109.512:
+            self.x_position = -(distance.distance(origin, (32.08595, longitude)).km)
+        else:
+            self.x_position = distance.distance(origin, (32.08595, longitude)).km
         self.y_velocity = velocity * np.cos((np.pi * heading) / 180)
         self.x_velocity = velocity * np.sin((np.pi * heading)/180)
         self.predicted_x_acceleration = 0
