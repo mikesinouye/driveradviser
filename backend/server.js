@@ -13,9 +13,10 @@ var logFile = fs.createWriteStream('requests.log', { flags: 'a' });
 var logStdout = process.stdout;
 var tick = 0
 var locationdata
-var spawnNATS = require("child_process").spawn;
-var processNATS = spawnNATS('python',["../main.py"])
 var stream = 0
+var spawnNATS = require("child_process").spawn;
+var processNATS = spawnNATS('python',["../main.py", stream])
+
 
 app.use(bodyParser.json({extended: true}))
 app.use('/', express.static('../frontend'))

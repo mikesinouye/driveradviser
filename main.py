@@ -1,6 +1,13 @@
 from subNats import *
 from pathPrediction import *
 from python.car_modeling.Car import *
+import sys
+
+x = -1
+if len(sys.argv) > 1:
+    x = int(sys.argv[1])
+else:
+    x = 0
 
 ownPredictor = PathPredictor()
 target1Predictor = PathPredictor()
@@ -44,4 +51,4 @@ def dataReadyCallback(dataPoint):
 
 
 if __name__ == "__main__":
-    initPosCollection(dataReadyCallback)
+    initPosCollection(dataReadyCallback, x)

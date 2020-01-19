@@ -6,11 +6,6 @@ import sys
 import requests
 from python.car_modeling.Car import *
 
-
-debug_mode = True
-
-curr_scenario = 4
-
 scenarios = []
 scenarios.append("single-scenario-easy-1")
 scenarios.append("single-scenario-easy-2")
@@ -19,7 +14,9 @@ scenarios.append("multiple-scenarios-1")
 scenarios.append("multiple-scenarios-2")
 scenarios.append("multiple-scenarios-3")
 
+
 def alert_json(data, alertID, region):
+    print("Current Scenario: " + str(curr_scenario))
     return ({"alarmId": "placeholder",
              "streamId": scenarios[curr_scenario],
              "sourceId": "20c067e529874f56a57d0022f64cc74e",
@@ -70,14 +67,13 @@ class DataPoints:
 		})
 
 
-async def run(loop, dataAddedCallback):
+async def run(loop, dataAddedCallback, curr_scenario):
     nc = NATS()
-
     async def error_cb(e):
         print("error:", e)
-
+    print("Current Scenario: " + str(curr_scenario))
     await nc.connect("nats://hackaz.modularminingcloud.com:4222",
-                     user_credentials='./hack.creds', #hack.creds should probably be gitignored from the repo
+                     user_credentials='../hack.creds', #hack.creds should probably be gitignored from the repo
                      error_cb=error_cb,
                      io_loop=loop,
                      )
@@ -112,20 +108,25 @@ async def run(loop, dataAddedCallback):
         if messages_received % 15 == 0:
             x = alert_json(newdata,1,1)
             p = requests.post(url="https://hackaz.modularminingcloud.com/api/Alert", json=x)
-            print("posted")
+            #print("posted")
         print(messages_received)
         print(positionModel)
-        # r = requests.post(url="http://localhost:9190/data", json=newdata.string_json())
-        # print(messages_received)
+        r = requests.post(url="http://localhost:9190/data", json=newdata.string_json())
+        #print(messages_received)
+        print(r.text)
 
-
+    
     sid = await nc.subscribe(scenarios[curr_scenario], cb=message_handler)
-    print("passed await")
+    print("Current Scenario: " + str(curr_scenario))	
 
     await asyncio.sleep(1)
 
-def initPosCollection(dataAddedCallback):
+def initPosCollection(dataAddedCallback, x):
+    debug_mode = True
+    curr_scenario = -1
+
+    curr_scenario = x
     loop = asyncio.get_event_loop()
     loop.set_debug(True)
-    loop.run_until_complete(run(loop, dataAddedCallback))
+    loop.run_until_complete(run(loop, dataAddedCallback, curr_scenario))
     loop.run_forever()
