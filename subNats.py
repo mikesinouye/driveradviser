@@ -56,14 +56,18 @@ class DataPoints:
     def __init__(self, positionmodel, timestamp):
         self.positionModel = positionmodel
         self.timestamp = timestamp
-    def string_json(self):
+    def string_json(self, return_list):
         return ({"timestamp": self.timestamp,
 		"position_data": [
 			{"latitude": self.positionModel.OwnPosition.Latitude, "longitude": self.positionModel.OwnPosition.Longitude, "altitude": self.positionModel.OwnPosition.Altitude,"heading": self.positionModel.OwnPosition.Heading, "velocity": self.positionModel.OwnPosition.Velocity},
 			{"latitude": self.positionModel.Target1Position.Latitude,"longitude": self.positionModel.Target1Position.Longitude,"altitude": self.positionModel.Target1Position.Altitude,"heading": self.positionModel.Target1Position.Heading, "velocity": self.positionModel.Target1Position.Velocity},
 			{"latitude": self.positionModel.Target2Position.Latitude,"longitude": self.positionModel.Target2Position.Longitude,"altitude": self.positionModel.Target2Position.Altitude,"heading": self.positionModel.Target2Position.Heading, "velocity": self.positionModel.Target2Position.Velocity},
 			{"latitude": self.positionModel.Target3Position.Latitude,"longitude": self.positionModel.Target3Position.Longitude,"altitude": self.positionModel.Target3Position.Altitude,"heading": self.positionModel.Target3Position.Heading, "velocity": self.positionModel.Target3Position.Velocity}
-		]
+		],
+        "prediction_data": [
+            {"coordinates": return_list
+            }
+        ]
 		})
 
 
@@ -81,6 +85,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
     messages_received = 0
     positionList = []
     async def message_handler(msg):
+        future_list = []
         # file = open("pos_data.txt", "a")
         positionModel = positionModel_pb2.State()
         positionModel.ParseFromString(msg.data)
@@ -93,7 +98,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
         # file.write("&\n")
         # file.close()
         newdata = DataPoints(positionModel, timestamp)
-        dataAddedCallback(newdata)
+        future_list = dataAddedCallback(newdata)
         positionList.append(newdata)
         # outfile = open("pos_data_json.txt", "w")
         # outfile.write(DataPoints(positionModel, timestamp).to_json())
@@ -111,7 +116,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
             #print("posted")
         print(messages_received)
         print(positionModel)
-        r = requests.post(url="http://localhost:9190/data", json=newdata.string_json())
+        r = requests.post(url="http://localhost:9190/data", json=newdata.string_json(future_list))
         #print(messages_received)
         print(r.text)
 
