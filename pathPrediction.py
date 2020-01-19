@@ -62,7 +62,7 @@ class PathPredictor:
         self.positions.append(newPos)
         self.predictedXAcceleration, self.predictedYAcceleration = self.predictParams()
         newPos.car.update_predictions(self.predictedXAcceleration, self.predictedYAcceleration)
-        latestCar = newPos.car
+        self.latestCar = newPos.car
         self.latestTime = timeStamp
 
     def predictPath(self):

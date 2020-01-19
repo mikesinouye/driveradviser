@@ -25,7 +25,7 @@ class Car:
         if latitude < 32.08595:
             self.y_position = -(distance.distance(origin, (latitude, -109.512)).km)
         else:
-            self.y_position = -(distance.distance(origin, (latitude, -109.512)).km)
+            self.y_position = (distance.distance(origin, (latitude, -109.512)).km)
         if longitude < -109.512:
             self.x_position = -(distance.distance(origin, (32.08595, longitude)).km)
         else:
