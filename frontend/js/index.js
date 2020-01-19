@@ -11,8 +11,10 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 $origination = $("#origination");
 $destination = $("#destination");
+$autofocus = $('#autofocus')
 $mode = $('#mode');
 $button = $("#submit-button");
+$clear = $("#clear-button");
 $heatmapbutton = $("#heat-button");
 $('#errorModal').modal({ show: false});
 var route = L.Routing.control({
@@ -21,14 +23,55 @@ var route = L.Routing.control({
 			}).addTo(mymap);
 
 var markerGroup = L.layerGroup().addTo(mymap);
+var truckGroup = L.layerGroup().addTo(mymap);
+var predictionGroup = L.layerGroup().addTo(mymap);
 var heatActive = false;
 var heat;
 var heatmap;
 var data = "";
 var oldPos = 0.0
 var refreshCount = 0
+var lines = new Array()
+
+var truckIcon = L.icon({
+	iconUrl: './assets/truck.png',
+	iconSize: [50, 38],
+	iconAnchor: [25, 19]
+})
+
+var crashIcon = L.icon({
+	iconUrl: './assets/crash.png',
+	iconSize: [64, 64],
+	iconAnchor: [32, 32]
+})
+			
+var truck0 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
+var truck1 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
+var truck2 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
+var truck3 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
 
 $heatmapbutton.click(function(event){
+
+	document.getElementById("crashWarningMessage").innerHTML = "no bueno. You abouta crash!"
+	$('#crashWarning').modal('show')
+
+	//FIXME
+	crash = new L.marker([0, 0], {icon: crashIcon}).addTo(markerGroup) 
+
+	/*$.ajax ({
+		url: './assets/heatmap.json',
+		method: "GET",
+		success: function(response){
+			console.log(response)
+			heatmap = $.parseJSON (response);
+			for (i = 0; i < heatmap.length; i++) {
+				heatmap[i][2] = heatmap[i][2] / 200;
+			}
+			
+		}
+    });*/
+	
+	heatmap = heatmapdata
 
 	if (heatActive) {
 		mymap.removeLayer(heat);
@@ -36,13 +79,7 @@ $heatmapbutton.click(function(event){
 	}
 
 	else {
-		heatmap = heatmapdata;
-
-		for (i = 0; i < heatmap.length; i++) {
-			heatmap[i][2] = heatmap[i][2] / 200;
-		}
-
-		heat = L.heatLayer(heatmap, {radius: 25}).addTo(mymap);
+		heat = L.heatLayer(heatmap, {radius: 25, max: 0.1, blur: 50}).addTo(mymap);
 		heatActive = true;
 	}
 });
@@ -50,40 +87,6 @@ $heatmapbutton.click(function(event){
 setInterval(pollServer, 100);
 
 function pollServer() {
-	
-	
-	/*var str1 = $string1.val()
-	var str2 = $string2.val()
-	var dynamicPricing = document.getElementById( "dynamicPricing" )
-	var mcu = document.getElementById( "mcu" )
-	var requestData = JSON.stringify({'string1': str1, 'string2': str2, 'mcu': mcu.selectedIndex, 'dynamicPricing':dynamicPricing.checked})
-	
-	console.log("This is what we're sending to the server:")
-	console.log(requestData)
-
-	$.ajax({
-		type: 'POST',
-		url: 'submit',
-		data: requestData,
-		contentType: 'application/json',
-		dataType: 'json',
-		timeout: 5000,
-
-		success: function(responseData){
-			console.log("We Recieved Data from Server!")
-			console.log(responseData)
-			document.getElementById("success").style.display = "block"
-			document.getElementById("loading").style.visibility = "hidden"
-			document.getElementById("serverMessage").innerHTML = JSON.parse(responseData).data
-			$('#serverSuccess').modal('show')
-		},
-		error: function(jqXHR, exception){
-			console.log(exception)
-			document.getElementById("loading").style.visibility = "hidden"
-			document.getElementById("success").style.display = "none"
-			$('#serverError').modal('show')
-		}
-	})*/
 	
 	$.ajax({
 		type: 'GET',
@@ -98,9 +101,15 @@ function pollServer() {
 			document.getElementById("success").style.display = "block"
 			document.getElementById("loading").style.visibility = "hidden"
 			//data = responseData.data
-			document.getElementById("serverMessage").innerHTML = responseData.OwnLat
-			document.getElementById("success").innerHTML = responseData.OwnLat
+			//document.getElementById("serverMessage").innerHTML = responseData.OwnLat
+			//document.getElementById("success").innerHTML = responseData.OwnLat
 			//$('#serverSuccess').modal('show')
+			
+			//FIXME
+			if (0) {
+				document.getElementById("crashWarningMessage").innerHTML = "no bueno. You abouta crash!"
+				$('#crashWarning').modal('show')
+			}
 			
 			var vehicle0 = new L.LatLng(responseData.position_data[0].latitude, responseData.position_data[0].longitude)
 			var vehicle1 = new L.LatLng(responseData.position_data[1].latitude, responseData.position_data[1].longitude)
@@ -108,46 +117,32 @@ function pollServer() {
 			var vehicle3 = new L.LatLng(responseData.position_data[3].latitude, responseData.position_data[3].longitude)
 			var average
 			refreshCount = refreshCount + 1
-
-			
-			/*if (responseData.position_data[0].latitude > 0.001) {
-				markerOrigin = new L.circleMarker(vehicle0, {radius: 5}).addTo(markerGroup)
-				average = new L.LatLng(responseData.position_data[0].latitude, responseData.position_data[0].longitude)
-			}
-			if (responseData.position_data[1].latitude > 0.001) {
-				markerOrigin = new L.circleMarker(vehicle1, {radius: 5}).addTo(markerGroup)
-				average = new L.LatLng((responseData.position_data[0].latitude + responseData.position_data[1].latitude)/2, (responseData.position_data[0].longitude + responseData.position_data[1].longitude)/2)
-			}
-			if (responseData.position_data[2].latitude > 0.001) {
-				markerOrigin = new L.circleMarker(vehicle2, {radius: 5}).addTo(markerGroup)
-				average = new L.LatLng((responseData.position_data[0].latitude + responseData.position_data[1].latitude + responseData.position_data[2].latitude)/3, (responseData.position_data[0].longitude + responseData.position_data[1].longitude + responseData.position_data[2].longitude)/3)
-			}
-			if (responseData.position_data[3].latitude > 0.001) {
-				markerOrigin = new L.circleMarker(vehicle3, {radius: 5}).addTo(markerGroup)
-				average = new L.LatLng((responseData.position_data[0].latitude + responseData.position_data[1].latitude + responseData.position_data[2].latitude + responseData.position_data[3].latitude)/4, (responseData.position_data[0].longitude + responseData.position_data[1].longitude + responseData.position_data[2].longitude + responseData.position_data[3].longitude)/4)
-			}*/
 			
 			var group
 			
-			if (responseData.position_data[0].latitude > 0.001) {
+			if (Math.abs(responseData.position_data[0].latitude) > 0.001) {
+				truck0.setLatLng(vehicle0)
 				marker0 = new L.circleMarker(vehicle0, {radius: 5}).addTo(markerGroup)
 				group = new L.featureGroup([marker0]);
 			}
-			if (responseData.position_data[1].latitude > 0.001) {
+			if (Math.abs(responseData.position_data[1].latitude) > 0.001) {
+				truck1.setLatLng(vehicle1)
 				marker1 = new L.circleMarker(vehicle1, {radius: 5}).addTo(markerGroup)
 				group = new L.featureGroup([marker0, marker1]);
 			}
-			if (responseData.position_data[2].latitude > 0.001) {
+			if (Math.abs(responseData.position_data[2].latitude) > 0.001) {
+				truck2.setLatLng(vehicle2)
 				marker2 = new L.circleMarker(vehicle2, {radius: 5}).addTo(markerGroup)
 				group = new L.featureGroup([marker0, marker1, marker2]);
 			}
-			if (responseData.position_data[3].latitude > 0.001) {
+			if (Math.abs(responseData.position_data[3].latitude) > 0.001) {
+				truck3.setLatLng(vehicle3)
 				marker3 = new L.circleMarker(vehicle3, {radius: 5}).addTo(markerGroup)
 				group = new L.featureGroup([marker0, marker1, marker2, marker3]);
 			}
 			
 			// Same scenario
-			if (Math.abs(oldPos - responseData.position_data[0].latitude) < 0.0005) {
+			if (Math.abs(oldPos - responseData.position_data[0].latitude) < 0.0003) {
 				
 			}
 			
@@ -156,11 +151,36 @@ function pollServer() {
 				markerGroup.clearLayers()
 				mymap.removeControl(route)
 				//mymap.setView(average, 23)
-				mymap.fitBounds(group.getBounds());
+				if (document.getElementById("autofocus").checked) {
+					mymap.fitBounds(group.getBounds());
+				}
 			}
 			
 			if (refreshCount > 5) {
-				mymap.fitBounds(group.getBounds());
+				predictionGroup.clearLayers()
+				for (i = 0; i < lines.length; i++) {
+					mymap.removeLayer(lines[i])
+				}
+				
+				for (i = 0; i < 4; i++) {
+					//FIXME
+					if (Math.abs(1) < 0.001) {
+						continue
+					}
+					
+					var pathPrediction = []
+					for (j = 0; j < 4; j++) {
+						predictionMarker = new L.circleMarker(vehicle0, {radius: 5, color: 'light-grey'}).addTo(predictionGroup)
+						pathPrediction.push(predictionMarker.getLatLng())
+					}	
+					var path = new L.polyline(pathPrediction, {color: 'light-grey'}).addTo(mymap)
+					lines.push(path)
+					path.addTo(group)
+				}
+				
+				if (document.getElementById("autofocus").checked) {
+					mymap.fitBounds(group.getBounds());
+				}
 				refreshCount = 0
 			}
 	
@@ -179,115 +199,2041 @@ function pollServer() {
 $button.click(function(event){
 	var origin = $origination.val();
 	var dest = $destination.val();
-	var mode = document.getElementById( "mode" );
-	var latLngOrigin;
-	var latLngDest;
-	var validRequest = true;
+	var stream = document.getElementById( "stream" );
 
-	markerGroup.clearLayers()
-	mymap.removeControl(route);
 	document.getElementById("loading").style.visibility = "visible";
 
-	var match = origin.search("85719");
-	if (match == -1) {
-		origin = origin + " 85719";
-	}
-
-	match = dest.search("85719");
-	if (match == -1) {
-		dest = dest + " 85719";
-	}
-
-	geocoder = new L.Control.Geocoder.Nominatim();
+	var requestData = JSON.stringify({'string1': origin, 'string2': dest, 'stream': stream.selectedIndex})
 	
-	geocoder.geocode(origin, function(originCoords) {
+	markerGroup.clearLayers()
+	mymap.removeControl(route)
+				
+	$.ajax({
+		type: 'POST',
+		url: 'form',
+		data: requestData,
+		contentType: 'application/json',
+		dataType: 'json',
+		timeout: 5000,
 
-		if (originCoords[0] == null) {
-			validRequest = false;
-			document.getElementById("routeFound").style.display = "none";
-			$('#addressError').modal('show');
+		success: function(responseData){
+			console.log("Stream change request received.")
+			console.log(responseData)
+			document.getElementById("success").style.display = "block"
+			document.getElementById("loading").style.visibility = "hidden"
+			document.getElementById("serverMessage").innerHTML = JSON.parse(responseData).data
+			$('#serverSuccess').modal('show')
+		},
+		error: function(jqXHR, exception){
+			console.log(exception)
+			document.getElementById("loading").style.visibility = "hidden"
+			document.getElementById("success").style.display = "none"
+			$('#serverError').modal('show')
 		}
-		else {
-			latLngOrigin = new L.LatLng(originCoords[0].center.lat, originCoords[0].center.lng);
-			markerOrigin = new L.Marker(latLngOrigin).addTo(markerGroup);
-			console.log(origin + " was found at " + latLngOrigin.toString());
-		}
-
-
-		geocoder.geocode(dest, function(destCoords) {
-
-			if (destCoords[0] == null) {
-				validRequest = false;
-				document.getElementById("routeFound").style.display = "none";
-				$('#addressError').modal('show');
-			}
-			else {
-				latLngDest = new L.LatLng(destCoords[0].center.lat, destCoords[0].center.lng);
-				markerDest = new L.Marker(latLngDest).addTo(markerGroup);
-				console.log(dest + " was found at " + latLngDest.toString());
-			}
-
-			if (validRequest) {
-				var requestData = JSON.stringify({'originLat': latLngOrigin.lat, 'originLng': latLngOrigin.lng, 'destLat': latLngDest.lat, 'destLng': latLngDest.lng, 'dataset': mode.selectedIndex});
-				console.log(requestData);
-
-				//start
-
-				var xhr = new XMLHttpRequest();
-
-				xhr.responseType = "json";
-				xhr.open("POST", "http://72.200.110.63:9190/get_route", true);
-
-				xhr.addEventListener("load", function() {
-					console.log("Recieved Data from Server ");
-					//console.log(xhr.responseText);
-					document.getElementById("loading").style.visibility = "hidden";
-					var responseData = JSON.parse(xhr.response);
-					var endpoints = responseData.points;
-					var path = [];
-
-					for (i = 0; i < endpoints.length; i++) {
-						path[i] = new L.LatLng(endpoints[i][0], endpoints[i][1], endpoints[i][2]);
-					}
-
-					route = L.Routing.control({
-						waypoints: path,
-						//createMarker: function() { return null; },
-						/*lineOptions: {
-							addWaypoints: false
-						},*/
-						waypointMode: 'snap',
-						lineOptions: {
-							styles: [{color: 'red', opacity: 0, weight: 5}]
-						}
-						
-					}).addTo(mymap);
-
-					if (window.innerWidth < 750) {
-						route.hide();
-					}
-					else route.show();
-
-					document.getElementById("routeFound").style.display = "block";
-
-				});
-
-				xhr.addEventListener("progress", function(){
-					document.getElementById("loading").style.visibility = "visible";
-				});
-
-				xhr.addEventListener("error", function(jqXHR, textStatus, errorThrown){
-					document.getElementById("loading").style.visibility = "hidden";
-					console.log(errorThrown);
-					document.getElementById("routeFound").style.display = "none";
-					$('#serverError').modal('show');
-				});
-
-
-				xhr.setRequestHeader("Content-Type", "application/json");
-				xhr.send(requestData);
-
-			}
-		});
-	});
+	})
+	
 })
+
+$clear.click(function(event){
+	markerGroup.clearLayers()
+	mymap.removeControl(route)
+})
+
+var heatmapdata = [
+	[
+		32.08102296,
+		-110.554042,
+	],
+	[
+		32.08599583,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08063746,
+		-110.554042,
+	],
+	[
+		32.08587855,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08063574,
+		-110.554042,
+	],
+	[
+		32.08052383,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08597356,
+		-109.5121522,
+	],
+	[
+		32.08555827,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08102225,
+		-110.554042,
+	],
+	[
+		32.08599587,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08582993,
+		-109.5118336,
+	],
+	[
+		32.08061966,
+		-110.554042,
+	],
+	[
+		32.08580051,
+		-109.5126636,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08579411,
+		-109.5119817,
+	],
+	[
+		32.08092077,
+		-110.554042,
+	],
+	[
+		32.08607619,
+		-109.5121522,
+	],
+	[
+		32.08599645,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.085558,
+		-109.5121522,
+	],
+	[
+		32.08074457,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08074368,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08586149,
+		-109.5121522,
+	],
+	[
+		32.08051946,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08051915,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08080164,
+		-110.554042,
+	],
+	[
+		32.08586003,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08607617,
+		-109.5121523,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08093188,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.0857837,
+		-109.5120146,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08583021,
+		-109.5118336,
+	],
+	[
+		32.0862668,
+		-109.511519,
+	],
+	[
+		32.08092016,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08580771,
+		-109.512354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08561399,
+		-109.5126375,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08603493,
+		-109.5121053,
+	],
+	[
+		32.08559435,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08586045,
+		-109.5118649,
+	],
+	[
+		32.08559502,
+		-109.5121522,
+	],
+	[
+		32.08102263,
+		-110.5540419,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08559327,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08051811,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08550135,
+		-109.5118933,
+	],
+	[
+		32.0808042,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08589432,
+		-109.5122675,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08568482,
+		-109.5121522,
+	],
+	[
+		32.08555796,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08080228,
+		-110.554042,
+	],
+	[
+		32.08602711,
+		-109.5121764,
+	],
+	[
+		32.08583149,
+		-109.5118336,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08570151,
+		-109.5117536,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08568933,
+		-109.5127354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08657398,
+		-109.5112453,
+	],
+	[
+		32.08092069,
+		-110.554042,
+	],
+	[
+		32.08556004,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08657214,
+		-109.5113639,
+	],
+	[
+		32.08074079,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08568227,
+		-109.5121522,
+	],
+	[
+		32.08082254,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08064364,
+		-110.5540419,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600863,
+		-109.5121522,
+	],
+	[
+		32.08609905,
+		-109.5121523,
+	],
+	[
+		32.08076264,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08567971,
+		-109.5118336,
+	],
+	[
+		32.08559782,
+		-109.5123123,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08585914,
+		-109.5121522,
+	],
+	[
+		32.08597351,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08582587,
+		-109.512382,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08108543,
+		-110.554042,
+	],
+	[
+		32.08607642,
+		-109.5121522,
+	],
+	[
+		32.08599615,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08587785,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08590836,
+		-109.5118335,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08568228,
+		-109.5118336,
+	],
+	[
+		32.08579484,
+		-109.5121522,
+	],
+	[
+		32.08599574,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08555636,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08587756,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08595461,
+		-109.5123621,
+	],
+	[
+		32.08555919,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08102296,
+		-110.554042,
+	],
+	[
+		32.08556354,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08063746,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08063574,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08554715,
+		-109.5125317,
+	],
+	[
+		32.08052383,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08597245,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08586127,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08586061,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08564674,
+		-109.5116125,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08597074,
+		-109.5119279,
+	],
+	[
+		32.08589681,
+		-109.5121522,
+	],
+	[
+		32.08102225,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08579253,
+		-109.5121522,
+	],
+	[
+		32.08061966,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08586009,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08092077,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08588083,
+		-109.5122227,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08074457,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08576701,
+		-109.5122223,
+	],
+	[
+		32.08074368,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08586024,
+		-109.5121522,
+	],
+	[
+		32.08051946,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08597307,
+		-109.5121522,
+	],
+	[
+		32.08051915,
+		-110.554042,
+	],
+	[
+		32.0858606,
+		-109.5121522,
+	],
+	[
+		32.0857139,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08080164,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08567936,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08557939,
+		-109.5117186,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08093188,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08552082,
+		-109.5124732,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08092016,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08568385,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08570918,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08559698,
+		-109.5119918,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08597426,
+		-109.5121522,
+	],
+	[
+		32.08102263,
+		-110.5540419,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08590772,
+		-109.5124828,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08051811,
+		-110.554042,
+	],
+	[
+		32.08568059,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08587846,
+		-109.5121522,
+	],
+	[
+		32.08571187,
+		-109.5121522,
+	],
+	[
+		32.0808042,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08559446,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08568036,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08080228,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08587974,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08092069,
+		-110.554042,
+	],
+	[
+		32.08653826,
+		-109.511264,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08074079,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.0858872,
+		-109.5122453,
+	],
+	[
+		32.08579482,
+		-109.5123223,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.0856481,
+		-109.5118415,
+	],
+	[
+		32.08082254,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08586053,
+		-109.5121522,
+	],
+	[
+		32.08064364,
+		-110.5540419,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08587776,
+		-109.5121522,
+	],
+	[
+		32.08076264,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08607633,
+		-109.5121522,
+	],
+	[
+		32.08587818,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08586016,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08108543,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08599556,
+		-109.5121522,
+	],
+	[
+		32.08586032,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.0855953,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08585756,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08599685,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08587746,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08556196,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08102296,
+		-110.554042,
+	],
+	[
+		32.08573528,
+		-109.5127736,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08628854,
+		-109.511688,
+	],
+	[
+		32.08063746,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08585998,
+		-109.5121522,
+	],
+	[
+		32.08063574,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08052383,
+		-110.554042,
+	],
+	[
+		32.0858347,
+		-109.5118336,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08587375,
+		-109.512176,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08559536,
+		-109.5121522,
+	],
+	[
+		32.08579497,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.0856859,
+		-109.5121522,
+	],
+	[
+		32.08102225,
+		-110.554042,
+	],
+	[
+		32.08587849,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08061966,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08586203,
+		-109.5124376,
+	],
+	[
+		32.0859738,
+		-109.5121522,
+	],
+	[
+		32.08555588,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08092077,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08587998,
+		-109.5120814,
+	],
+	[
+		32.08074457,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08074368,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08567809,
+		-109.5118336,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08051946,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08568555,
+		-109.5121522,
+	],
+	[
+		32.08051915,
+		-110.554042,
+	],
+	[
+		32.0858624,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08559363,
+		-109.5121522,
+	],
+	[
+		32.08080164,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08576399,
+		-109.5121873,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08093188,
+		-110.554042,
+	],
+	[
+		32.08607577,
+		-109.5121523,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08584362,
+		-109.5118945,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08556143,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08092016,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08599566,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08564889,
+		-109.5126894,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08607592,
+		-109.5121522,
+	],
+	[
+		32.08640564,
+		-109.5114728,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08102263,
+		-110.5540419,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08051811,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08597395,
+		-109.5121522,
+	],
+	[
+		32.0808042,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.0858779,
+		-109.5121522,
+	],
+	[
+		32.08556015,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08080228,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08597333,
+		-109.5121522,
+	],
+	[
+		32.08607697,
+		-109.5121521,
+	],
+	[
+		32.08559428,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08092069,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08074079,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08599515,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08082254,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08586138,
+		-109.5121522,
+	],
+	[
+		32.08064364,
+		-110.5540419,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08582388,
+		-109.5119208,
+	],
+	[
+		32.08076264,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08592585,
+		-109.5123285,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08609948,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08568159,
+		-109.5121522,
+	],
+	[
+		32.08588016,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08568305,
+		-109.5121522,
+	],
+	[
+		32.08589864,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08568069,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08570999,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08561115,
+		-109.5116641,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08632561,
+		-109.511495,
+	],
+	[
+		32.08573578,
+		-109.5115316,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08108543,
+		-110.554042,
+	],
+	[
+		32.0855961,
+		-109.5121522,
+	],
+	[
+		32.0855975,
+		-109.5121522,
+	],
+	[
+		32.08609888,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08559733,
+		-109.5121522,
+	],
+	[
+		32.0859744,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08546397,
+		-109.5122183,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08555727,
+		-109.5121522,
+	],
+	[
+		32.08555973,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08653379,
+		-109.5111765,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08102296,
+		-110.554042,
+	],
+	[
+		32.08607634,
+		-109.5121522,
+	],
+	[
+		32.08557859,
+		-109.5122065,
+	],
+	[
+		32.08587635,
+		-109.5121522,
+	],
+	[
+		32.08063746,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.0863513,
+		-109.5115317,
+	],
+	[
+		32.08063574,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08052383,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08570946,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08597241,
+		-109.5121522,
+	],
+	[
+		32.08585844,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.0858849,
+		-109.5118442,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08609905,
+		-109.5121522,
+	],
+	[
+		32.08556083,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08102225,
+		-110.554042,
+	],
+	[
+		32.08599671,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08061966,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08555945,
+		-109.5121522,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08559611,
+		-109.5121522,
+	],
+	[
+		32.08597295,
+		-109.5121523,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08555872,
+		-109.5121522,
+	],
+	[
+		32.08092077,
+		-110.554042,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08571077,
+		-109.5121522,
+	],
+	[
+		32.08074457,
+		-110.554042,
+	],
+	[
+		32.08577345,
+		-109.5120477,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.0856993,
+		-109.5118335,
+	],
+	[
+		32.08074368,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08051946,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08051915,
+		-110.554042,
+	],
+	[
+		32.08636034,
+		-109.5114354,
+	],
+	[
+		32.08585947,
+		-109.5121522,
+	],
+	[
+		32.08600819,
+		-109.5121521,
+	],
+	[
+		32.08080164,
+		-110.554042,
+	],
+	[
+		32.08579452,
+		-109.5121522,
+	],
+]

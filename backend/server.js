@@ -15,6 +15,7 @@ var tick = 0
 var locationdata
 var spawnNATS = require("child_process").spawn;
 var processNATS = spawnNATS('python',["../main.py"])
+var stream = 0
 
 app.use(bodyParser.json({extended: true}))
 app.use('/', express.static('../frontend'))
@@ -53,6 +54,15 @@ app.get('/update', function(req, res){
 	return res.status(200).json(locationdata);
 });
 
+app.post('/form', function(req, res){
+    console.log("Received a stream change request from the client:");
+	console.log(req.body.stream);
+	stream = req.body.stream
+	loadNATS()
+	
+	res.status(200).json(JSON.stringify({'data': 'Data stream changed!'}))
+});
+
 app.post('/data', function(req, res){
     console.log('received location data');
 	//console.log(req);
@@ -85,7 +95,7 @@ function intermittent() {
 function loadNATS() {
 	processNATS.kill()
 	spawnNATS = require("child_process").spawn;
-	processNATS = spawnNATS('python',["../main.py"])
+	processNATS = spawnNATS('python',["../main.py", stream])
 	console.log('begin NATS data collection')
 }
 setInterval(loadNATS, 5000);

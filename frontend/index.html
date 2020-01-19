@@ -27,7 +27,6 @@
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
         <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
         <script src="./lib/Leaflet.heat-gh-pages/dist/leaflet-heat.js"></script>
-        <script type="text/javascript" src="./assets/uaheatmap.json"></script>
 
     </head>
 
@@ -49,15 +48,23 @@
                                 <label for="destination">Destination</label>
                                 <input type="text" class="form-control" id="destination" placeholder="Enter destination">
                             </div>
-                            <label for="mode">Route Mode</label>
-                            <select id="mode" class="form-control">
-                                <option>Daytime Crime</option>
-                                <option>Nighttime Crime</option>
-                                <option>Bike Accidents</option>
+                            <label for="stream">Stream Mode</label>
+                            <select id="stream" class="form-control">
+                                <option>single-scenario-easy-1</option>
+                                <option>single-scenario-easy-2</option>
+                                <option>single-scenario-easy-3</option>
+								<option>multiple-scenarios-1</option>
+								<option>multiple-scenarios-2</option>
+								<option>multiple-scenarios-3</option>
                             </select>
                             <div style="text-align:center;">
-                                <button type="submit" id="submit-button" class="btn btn-primary">Map Route</button>
-                                <button type="button" id="heat-button" class="btn btn-secondary">Crime Heat Map</button>
+                                <button type="submit" id="submit-button" class="btn btn-primary">Update</button>
+                                <button type="button" id="heat-button" class="btn btn-secondary">Frequent Accident Overlay</button>
+								<button type="button" id="clear-button" class="btn btn-secondary">Clear</button>
+								<div class="custom-control custom-switch">
+									<input type="checkbox" class="custom-control-input" id="autofocus">
+									<label class="custom-control-label" for="autofocus">Auto-focus View</label>
+								</div>
                                 <i id="loading" class="fa fa-refresh fa-spin"></i>
                             </div>
 
@@ -76,7 +83,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">server Response:</h5>
+						<h5 class="modal-title" id="exampleModalLabel">DriverAdviser:</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
@@ -118,6 +125,25 @@
                     </button>
                 </div>
                 <div class="modal-body">Could not resolve address within Tucson city limits.</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="modal fade" id="crashWarning" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crash Warning!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+					<p id ="crashWarningMessage"></p>
+				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
