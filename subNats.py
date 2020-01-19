@@ -13,7 +13,8 @@ scenarios.append("single-scenario-easy-3")
 scenarios.append("multiple-scenarios-1")
 scenarios.append("multiple-scenarios-2")
 scenarios.append("multiple-scenarios-3")
-
+scenarios.append("new-scenarios-1")
+scenarios.append("INSERT_STREAM_HERE!")
 
 def alert_json(data, alertID, region):
     print("Current Scenario: " + str(curr_scenario))
@@ -85,7 +86,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
     await nc.connect("nats://hackaz.modularminingcloud.com:4222",
                      user_credentials='./hack.creds', #hack.creds should probably be gitignored from the repo
                      error_cb=error_cb,
-                     io_loop=loop,
+                     io_loop=loop
                      )
 
     messages_received = 0

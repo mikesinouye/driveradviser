@@ -52,12 +52,13 @@ app.get('/python', function(req,res){
 app.get('/update', function(req, res){
     console.log("got a GET ping from the client");
     //return res.status(200).json(JSON.parse(locationdata));
+	//console.log(locationdata)
 	return res.status(200).json(locationdata);
 });
 
 app.post('/form', function(req, res){
     console.log("Received a stream change request from the client:");
-	console.log(req.body.stream);
+	//console.log(req.body.stream);
 	stream = req.body.stream
 	loadNATS()
 	

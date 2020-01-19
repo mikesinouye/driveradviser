@@ -93,10 +93,10 @@ function pollServer() {
 			// Event type 1 is advice
 			if ((currentDanger < 1) && ((responseData.alert_data[0].alert_and_time[0][0] == 1) || (responseData.alert_data[0].alert_and_time[1][0] == 1) || (responseData.alert_data[0].alert_and_time[2][0] == 1))) {
 				currentDanger = 1
-				document.getElementById("crashWarningMessage").innerHTML = "Advice: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
+				document.getElementById("crashWarningMessage").innerHTML = "Advice: On current course, collision may occur in ".concat(responseData.alert_data[0].alert_and_time[0][1] * 3600, " seconds!")
 				document.getElementById("success").style.display = "block"
-				document.getElementById("success").innerHTML = "Advice: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
-				//$('#crashWarning').modal('show')
+				document.getElementById("success").innerHTML = "Advice: On current course, collision may occur in ".concat(responseData.alert_data[0].alert_and_time[0][1] * 3600, " seconds!")
+				$('#crashWarning').modal('show')
 				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2][0], responseData.alert_data[0].alert_and_time[0][2][1])
 				crash.setLatLng(crashLoc)
 			}
@@ -104,10 +104,10 @@ function pollServer() {
 			// Event type 2 is warning
 			else if ((currentDanger < 2) && ((responseData.alert_data[0].alert_and_time[0][0] == 2) || (responseData.alert_data[0].alert_and_time[1][0] == 2) || (responseData.alert_data[0].alert_and_time[2][0] == 2))) {
 				currentDanger = 2
-				document.getElementById("crashWarningMessage").innerHTML = "Warning: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
+				document.getElementById("crashWarningMessage").innerHTML = "Warning: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1] * 3600, " seconds!")
 				document.getElementById("success").style.display = "block"
-				document.getElementById("success").innerHTML = "Warning: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
-				//$('#crashWarning').modal('show')
+				document.getElementById("success").innerHTML = "Warning: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1] * 3600, " seconds!")
+				$('#crashWarning').modal('show')
 				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2][0], responseData.alert_data[0].alert_and_time[0][2][1])
 				crash.setLatLng(crashLoc)
 			}
@@ -118,7 +118,7 @@ function pollServer() {
 				document.getElementById("crashWarningMessage").innerHTML = "Near Miss!"
 				document.getElementById("success").style.display = "block"
 				document.getElementById("success").innerHTML = "Near Miss!"
-				//$('#crashWarning').modal('show')
+				$('#crashWarning').modal('show')
 				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2][0], responseData.alert_data[0].alert_and_time[0][2][1])
 				crash.setLatLng(crashLoc)
 			}
@@ -129,10 +129,18 @@ function pollServer() {
 				document.getElementById("crashWarningMessage").innerHTML = "Yikes! A collision has occured!"
 				document.getElementById("success").style.display = "block"
 				document.getElementById("success").innerHTML = "Yikes! A collision has occured!"
-				//$('#crashWarning').modal('show')
+				$('#crashWarning').modal('show')
 				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2][0], responseData.alert_data[0].alert_and_time[0][2][1])
 				crash.setLatLng(crashLoc)
 			}
+			
+			/*// All Clear
+			else if (((responseData.alert_data[0].alert_and_time[0][0] == 5) || (responseData.alert_data[0].alert_and_time[1][0] == 5) || (responseData.alert_data[0].alert_and_time[2][0] == 5))) {
+				currentDanger = 4
+				document.getElementById("success").style.display = "hidden"
+				document.getElementById("success").innerHTML = ""
+				crash.setLatLng(origin)
+			}*/
 
 			
 			
@@ -173,6 +181,8 @@ function pollServer() {
 			
 			// New scenario
 			else {
+				document.getElementById("success").style.display = "hidden"
+				document.getElementById("success").innerHTML = ""
 				crash.setLatLng(origin)
 				currentDanger = 0
 				markerGroup.clearLayers()
@@ -199,7 +209,6 @@ function pollServer() {
 						predictionMarker = new L.circleMarker(responseData.prediction_data[0].predictions[i][j], {radius: 5, color: 'light-grey'}).addTo(predictionGroup)
 						pathPrediction.push(responseData.prediction_data[0].predictions[i][j])
 					}
-					//FIXME
 					var path = L.polyline(pathPrediction, {color: 'gray'}).addTo(mymap)
 					lines.push(path)
 					path.addTo(group)

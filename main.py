@@ -6,7 +6,6 @@ import sys
 x = -1
 if len(sys.argv) > 1:
     x = int(sys.argv[1])
-    x = 0
 else:
     x = 0
 
