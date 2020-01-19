@@ -51,8 +51,8 @@ class PathPredictor:
                 # xVelocitySum += self.positions[i].Car.x_velocity
                 # yVelocitySum += self.positions[i].Car.y_velocity
                 if i != 0:
-                    xAccelerationSum += self.positions[i].car.x_velocity - self.positions[i - 1].car.x_velocity
-                    yAccelerationSum += self.positions[i].car.y_velocity - self.positions[i - 1].car.y_velocity
+                    xAccelerationSum += (self.positions[i].car.x_velocity - self.positions[i - 1].car.x_velocity) / (self.positions[i].timeStamp - self.positions[i-1].timeStamp)
+                    yAccelerationSum += (self.positions[i].car.y_velocity - self.positions[i - 1].car.y_velocity) / (self.positions[i].timeStamp - self.positions[i-1].timeStamp)
 
             return ((xAccelerationSum / (size - 1)), (yAccelerationSum / (size - 1)))
 
@@ -124,3 +124,9 @@ class PathPredictor:
             pointList.append([lat, lon])
 
         return pointList
+
+    """
+    check if collision has occurred
+    """
+    def isStopped(self):
+        pass

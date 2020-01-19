@@ -152,12 +152,22 @@ class Car:
         print("x_intersection_pos_2: {}".format(x_intersection_pos_1))
         print("y_intersection_pos_2: {}".format(y_intersection_pos_1))
 
+        #edge case: could be x and y times for different intercepts
+        #TODO: handle if time
+
+        #TODO: detect near miss if within 3 seconds of impact when cleared. Need to store last calculated values
+        #for impact time and
+
+        #TODO: send collision coordinate
+
         # check if both intersection times are non-negative
         if (x_intersection_time_1 >= 0) and (y_intersection_time_1 >= 0) and not np.iscomplex(x_intersection_time_1) and not np.iscomplex(y_intersection_time_1):
 
             if np.abs(x_intersection_time_1 - y_intersection_time_1) < INTERSECTION_TIME_MARGIN or np.isinf(x_intersection_time_1) or np.isinf(y_intersection_time_1):
                 print("WARNING, collision will occur at time: {}".format(x_intersection_time_1))
                 if(x_intersection_time_1 < 1):
+                    # x_collision_position = car1_x_eq[0] + car1_x_eq[1] * x_intersection_time_1 + car1_x_eq[2] * x_intersection_time_1 ** 2
+                    # y_collision_position =
                     return [4, x_intersection_time_1]
                 elif x_intersection_time_1 < 5:
                     return [2, x_intersection_time_1]
