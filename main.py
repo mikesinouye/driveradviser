@@ -16,6 +16,7 @@ target3Predictor = PathPredictor()
 
 def dataReadyCallback(dataPoint):
     return_list = []
+    alert_list = []
     #collect data
     if(dataPoint.positionModel.OwnPosition != 0.0):
         ownPredictor.hasPosData = True
@@ -41,15 +42,16 @@ def dataReadyCallback(dataPoint):
     if(ownPredictor.hasPosData):
         return_list.append(ownPredictor.predictPath(8, 4))
         if(target1Predictor.hasPosData):
-            Car.predict_collision(ownPredictor.latestCar, target1Predictor.latestCar)
+            alert_list.append(Car.predict_collision(ownPredictor.latestCar, target1Predictor.latestCar))
             return_list.append(target1Predictor.predictPath(8, 4))
         if(target2Predictor.hasPosData):
-            Car.predict_collision(ownPredictor.latestCar, target2Predictor.latestCar)
+            alert_list.append(Car.predict_collision(ownPredictor.latestCar, target2Predictor.latestCar))
             return_list.append(target2Predictor.predictPath(8, 4))
         if(target3Predictor.hasPosData):
-            Car.predict_collision(ownPredictor.latestCar, target3Predictor.latestCar)
+            alert_list.append(Car.predict_collision(ownPredictor.latestCar, target3Predictor.latestCar))
             return_list.append(target3Predictor.predictPath(8, 4))
 
+    return (return_list, alert_list)
 
 
 if __name__ == "__main__":
