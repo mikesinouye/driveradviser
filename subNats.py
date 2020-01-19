@@ -66,12 +66,12 @@ class DataPoints:
 		],
         "prediction_data": [
             {
-                "latitude": str(return_list)
+                "predictions": return_list
             }
         ],
         "alert_data": [
             {
-                "alert_and_time": str(alert_list)
+                "alert_and_time": alert_list
             }
         ]
 		})

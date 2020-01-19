@@ -32,6 +32,7 @@ var data = "";
 var oldPos = 0.0
 var refreshCount = 0
 var lines = new Array()
+var currentDanger = 0
 
 var truckIcon = L.icon({
 	iconUrl: './assets/truck.png',
@@ -49,27 +50,9 @@ var truck0 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup)
 var truck1 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
 var truck2 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
 var truck3 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
+var crash = new L.marker([0, 0], {icon: crashIcon}).addTo(truckGroup)
 
 $heatmapbutton.click(function(event){
-
-	document.getElementById("crashWarningMessage").innerHTML = "no bueno. You abouta crash!"
-	$('#crashWarning').modal('show')
-
-	//FIXME
-	crash = new L.marker([0, 0], {icon: crashIcon}).addTo(markerGroup) 
-
-	/*$.ajax ({
-		url: './assets/heatmap.json',
-		method: "GET",
-		success: function(response){
-			console.log(response)
-			heatmap = $.parseJSON (response);
-			for (i = 0; i < heatmap.length; i++) {
-				heatmap[i][2] = heatmap[i][2] / 200;
-			}
-			
-		}
-    });*/
 	
 	heatmap = heatmapdata
 
@@ -105,10 +88,40 @@ function pollServer() {
 			//document.getElementById("success").innerHTML = responseData.OwnLat
 			//$('#serverSuccess').modal('show')
 			
-			//FIXME
-			if (0) {
-				document.getElementById("crashWarningMessage").innerHTML = "no bueno. You abouta crash!"
+			// Event type 1 is advice
+			if ((currentDanger < 1) && ((responseData.alert_data[0].alert_and_time[0][0] == 1) || (responseData.alert_data[0].alert_and_time[1][0] == 1) || (responseData.alert_data[0].alert_and_time[2][0] == 1))) {
+				currentDanger = 1
+				document.getElementById("crashWarningMessage").innerHTML = "Advice: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
 				$('#crashWarning').modal('show')
+
+				crash.setLatLng([0, 0])
+			}
+			
+			// Event type 2 is warning
+			if ((currentDanger < 2) && ((responseData.alert_data[0].alert_and_time[0][0] == 2) || (responseData.alert_data[0].alert_and_time[1][0] == 2) || (responseData.alert_data[0].alert_and_time[2][0] == 2))) {
+				currentDanger = 2
+				document.getElementById("crashWarningMessage").innerHTML = "Warning: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
+				$('#crashWarning').modal('show')
+				
+				crash.setLatLng([0, 0])
+			}
+			
+			// Event type 3 is nearmiss
+			if ((currentDanger < 3) && ((responseData.alert_data[0].alert_and_time[0][0] == 3) || (responseData.alert_data[0].alert_and_time[1][0] == 3) || (responseData.alert_data[0].alert_and_time[2][0] == 3))) {
+				currentDanger = 3
+				document.getElementById("crashWarningMessage").innerHTML = "Near Miss!"
+				$('#crashWarning').modal('show')
+				
+				crash.setLatLng([0, 0])
+			}
+			
+			// Event type 4 is incident
+			if ((currentDanger < 4) && ((responseData.alert_data[0].alert_and_time[0][0] == 4) || (responseData.alert_data[0].alert_and_time[1][0] == 4) || (responseData.alert_data[0].alert_and_time[2][0] == 4))) {
+				currentDanger = 4
+				document.getElementById("crashWarningMessage").innerHTML = "Yikes! A collision has occured!"
+				$('#crashWarning').modal('show')
+				
+				crash.setLatLng([0, 0])
 			}
 			
 			var vehicle0 = new L.LatLng(responseData.position_data[0].latitude, responseData.position_data[0].longitude)
@@ -148,6 +161,8 @@ function pollServer() {
 			
 			// New scenario
 			else {
+				crash.setLatLng([0, 0])
+				currentDanger = 0
 				markerGroup.clearLayers()
 				mymap.removeControl(route)
 				//mymap.setView(average, 23)
@@ -163,17 +178,16 @@ function pollServer() {
 				}
 				
 				for (i = 0; i < 4; i++) {
-					//FIXME
-					if (Math.abs(1) < 0.001) {
+					if (Math.abs(responseData.prediction_data[0].predictions[i][0][0]) < 1) {
 						continue
 					}
 					
 					var pathPrediction = []
 					for (j = 0; j < 4; j++) {
-						predictionMarker = new L.circleMarker(vehicle0, {radius: 5, color: 'light-grey'}).addTo(predictionGroup)
-						pathPrediction.push(predictionMarker.getLatLng())
+						predictionMarker = new L.circleMarker(responseData.prediction_data[0].predictions[i][j], {radius: 5, color: 'light-grey'}).addTo(predictionGroup)
+						pathPrediction.push(responseData.prediction_data[0].predictions[i][j])
 					}	
-					var path = new L.polyline(pathPrediction, {color: 'light-grey'}).addTo(mymap)
+					var path = L.polyline(pathPrediction, {color: 'gray'}).addTo(mymap)
 					lines.push(path)
 					path.addTo(group)
 				}
