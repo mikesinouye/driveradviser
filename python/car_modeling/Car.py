@@ -393,28 +393,6 @@ class Car:
             d_lon = change_in_longitude(lat, x * miles_per_km)
             lon = d_lon + origin[1]
 
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 80a083135049ce5c11a171a75acfb13e21cc03f5
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             print("coord: {}, {}".format(lat, lon))
 
             return [4, x_intersection_time_1, [lat, lon]]

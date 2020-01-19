@@ -200,9 +200,9 @@ function pollServer() {
 						pathPrediction.push(responseData.prediction_data[0].predictions[i][j])
 					}
 					//FIXME
-					/*var path = L.polyline(pathPrediction, {color: 'gray'}).addTo(mymap)
+					var path = L.polyline(pathPrediction, {color: 'gray'}).addTo(mymap)
 					lines.push(path)
-					path.addTo(group)*/
+					path.addTo(group)
 				}
 				
 				if (document.getElementById("autofocus").checked) {
