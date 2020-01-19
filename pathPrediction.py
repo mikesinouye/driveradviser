@@ -121,6 +121,6 @@ class PathPredictor:
             d_lon = change_in_longitude(lat, x*miles_per_km)
             lon = d_lon + origin[1]
 
-            pointList.append((lat, lon))
+            pointList.append([lat, lon])
 
         return pointList
