@@ -1,5 +1,5 @@
 import numpy as np
-
+from geopy import distance
 # very small number so we dont divide by 0
 EPSILON = 10**-3
 INTERSECTION_TIME_MARGIN = 0.25
@@ -15,6 +15,32 @@ class Car:
         self.y_position = y_position
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
+
+    def __init__(self, latitude, longitude, heading, velocity):
+        # 0 longitude is -109.512
+        # 0 latitude is 32.08595
+        origin = (32.08595, -109.512)
+        if latitude < 32.08595:
+            self.y_position = -(distance.distance(origin, (latitude, -109.512)).km)
+        else:
+            self.y_position = -(distance.distance(origin, (latitude, -109.512)).km)
+        if longitude < -109.512:
+            self.x_position = -(distance.distance(origin, (32.08595, longitude)).km)
+        else:
+            self.x_position = distance.distance(origin, (32.08595, longitude)).km
+        self.y_velocity = velocity * np.cos((np.pi * heading) / 180)
+        self.x_velocity = velocity * np.sin((np.pi * heading)/180)
+
+    """
+    input heading (as degrees clockwise from north) and speed
+    return x_velocity (east direction as positive) and y_velocity (north direction as positive)
+    """
+    @staticmethod
+    def heading_conversion(heading, speed):
+        x_velocity = speed * np.sin((np.pi * heading)/180)
+        y_velocity = speed * np.cos((np.pi * heading) / 180)
+        return (x_velocity, y_velocity)
+
 
     """
     looks at the current state of the car, and returns parametric equations
