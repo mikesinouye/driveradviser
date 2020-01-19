@@ -99,7 +99,7 @@ function loadNATS() {
 	processNATS = spawnNATS('python',["../main.py", stream])
 	console.log('begin NATS data collection')
 }
-setInterval(loadNATS, 5000);
+setInterval(loadNATS, 10000);
 
 app.listen(9190, function() {
 	loadNATS()

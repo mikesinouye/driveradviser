@@ -49,8 +49,9 @@ var crashIcon = L.icon({
 var truck0 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
 var truck1 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
 var truck2 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
-var truck3 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
+var truck3 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup)
 var crash = new L.marker([0, 0], {icon: crashIcon}).addTo(truckGroup)
+var crashLoc
 
 $heatmapbutton.click(function(event){
 	
@@ -87,42 +88,44 @@ function pollServer() {
 			//document.getElementById("serverMessage").innerHTML = responseData.OwnLat
 			//document.getElementById("success").innerHTML = responseData.OwnLat
 			//$('#serverSuccess').modal('show')
-			
+			/*
 			// Event type 1 is advice
 			if ((currentDanger < 1) && ((responseData.alert_data[0].alert_and_time[0][0] == 1) || (responseData.alert_data[0].alert_and_time[1][0] == 1) || (responseData.alert_data[0].alert_and_time[2][0] == 1))) {
 				currentDanger = 1
 				document.getElementById("crashWarningMessage").innerHTML = "Advice: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
 				$('#crashWarning').modal('show')
-
-				crash.setLatLng([0, 0])
+				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2].pop())
+				crash.setLatLng(crashLoc)
 			}
 			
 			// Event type 2 is warning
-			if ((currentDanger < 2) && ((responseData.alert_data[0].alert_and_time[0][0] == 2) || (responseData.alert_data[0].alert_and_time[1][0] == 2) || (responseData.alert_data[0].alert_and_time[2][0] == 2))) {
+			else if ((currentDanger < 2) && ((responseData.alert_data[0].alert_and_time[0][0] == 2) || (responseData.alert_data[0].alert_and_time[1][0] == 2) || (responseData.alert_data[0].alert_and_time[2][0] == 2))) {
 				currentDanger = 2
 				document.getElementById("crashWarningMessage").innerHTML = "Warning: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
 				$('#crashWarning').modal('show')
-				
-				crash.setLatLng([0, 0])
+				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2].pop())
+				crash.setLatLng(crashLoc)
 			}
 			
 			// Event type 3 is nearmiss
-			if ((currentDanger < 3) && ((responseData.alert_data[0].alert_and_time[0][0] == 3) || (responseData.alert_data[0].alert_and_time[1][0] == 3) || (responseData.alert_data[0].alert_and_time[2][0] == 3))) {
+			else if ((currentDanger < 3) && ((responseData.alert_data[0].alert_and_time[0][0] == 3) || (responseData.alert_data[0].alert_and_time[1][0] == 3) || (responseData.alert_data[0].alert_and_time[2][0] == 3))) {
 				currentDanger = 3
 				document.getElementById("crashWarningMessage").innerHTML = "Near Miss!"
 				$('#crashWarning').modal('show')
-				
-				crash.setLatLng([0, 0])
+				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2].pop())
+				crash.setLatLng(crashLoc)
 			}
 			
 			// Event type 4 is incident
-			if ((currentDanger < 4) && ((responseData.alert_data[0].alert_and_time[0][0] == 4) || (responseData.alert_data[0].alert_and_time[1][0] == 4) || (responseData.alert_data[0].alert_and_time[2][0] == 4))) {
+			else if ((currentDanger < 4) && ((responseData.alert_data[0].alert_and_time[0][0] == 4) || (responseData.alert_data[0].alert_and_time[1][0] == 4) || (responseData.alert_data[0].alert_and_time[2][0] == 4))) {
 				currentDanger = 4
 				document.getElementById("crashWarningMessage").innerHTML = "Yikes! A collision has occured!"
 				$('#crashWarning').modal('show')
-				
-				crash.setLatLng([0, 0])
+				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2].pop())
+				crash.setLatLng(crashLoc)
 			}
+			*/		
+			
 			
 			var vehicle0 = new L.LatLng(responseData.position_data[0].latitude, responseData.position_data[0].longitude)
 			var vehicle1 = new L.LatLng(responseData.position_data[1].latitude, responseData.position_data[1].longitude)
@@ -140,7 +143,7 @@ function pollServer() {
 			}
 			if (Math.abs(responseData.position_data[1].latitude) > 0.001) {
 				truck1.setLatLng(vehicle1)
-				marker1 = new L.circleMarker(vehicle1, {radius: 5}).addTo(markerGroup)
+				marker1 = new L.circleMarker(vehicle1, {radius: 5, color: 'blue'}).addTo(markerGroup)
 				group = new L.featureGroup([marker0, marker1]);
 			}
 			if (Math.abs(responseData.position_data[2].latitude) > 0.001) {
@@ -186,10 +189,11 @@ function pollServer() {
 					for (j = 0; j < 4; j++) {
 						predictionMarker = new L.circleMarker(responseData.prediction_data[0].predictions[i][j], {radius: 5, color: 'light-grey'}).addTo(predictionGroup)
 						pathPrediction.push(responseData.prediction_data[0].predictions[i][j])
-					}	
-					var path = L.polyline(pathPrediction, {color: 'gray'}).addTo(mymap)
+					}
+					//FIXME
+					/*var path = L.polyline(pathPrediction, {color: 'gray'}).addTo(mymap)
 					lines.push(path)
-					path.addTo(group)
+					path.addTo(group)*/
 				}
 				
 				if (document.getElementById("autofocus").checked) {
