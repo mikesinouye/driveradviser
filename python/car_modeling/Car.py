@@ -394,7 +394,6 @@ class Car:
             lon = d_lon + origin[1]
 
 
-            return pointList
 
 
 

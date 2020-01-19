@@ -45,7 +45,8 @@ var crashIcon = L.icon({
 	iconSize: [64, 64],
 	iconAnchor: [32, 32]
 })
-			
+
+var origin = new L.LatLng(0, 0)
 var truck0 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
 var truck1 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
 var truck2 = new L.marker([0, 0], {icon: truckIcon}).addTo(truckGroup) 
@@ -88,13 +89,15 @@ function pollServer() {
 			//document.getElementById("serverMessage").innerHTML = responseData.OwnLat
 			//document.getElementById("success").innerHTML = responseData.OwnLat
 			//$('#serverSuccess').modal('show')
-			/*
+
 			// Event type 1 is advice
 			if ((currentDanger < 1) && ((responseData.alert_data[0].alert_and_time[0][0] == 1) || (responseData.alert_data[0].alert_and_time[1][0] == 1) || (responseData.alert_data[0].alert_and_time[2][0] == 1))) {
 				currentDanger = 1
 				document.getElementById("crashWarningMessage").innerHTML = "Advice: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
-				$('#crashWarning').modal('show')
-				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2].pop())
+				document.getElementById("success").style.display = "block"
+				document.getElementById("success").innerHTML = "Advice: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
+				//$('#crashWarning').modal('show')
+				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2][0], responseData.alert_data[0].alert_and_time[0][2][1])
 				crash.setLatLng(crashLoc)
 			}
 			
@@ -102,8 +105,10 @@ function pollServer() {
 			else if ((currentDanger < 2) && ((responseData.alert_data[0].alert_and_time[0][0] == 2) || (responseData.alert_data[0].alert_and_time[1][0] == 2) || (responseData.alert_data[0].alert_and_time[2][0] == 2))) {
 				currentDanger = 2
 				document.getElementById("crashWarningMessage").innerHTML = "Warning: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
-				$('#crashWarning').modal('show')
-				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2].pop())
+				document.getElementById("success").style.display = "block"
+				document.getElementById("success").innerHTML = "Warning: Collision may occur with a vehicle in ".concat(responseData.alert_data[0].alert_and_time[0][1], "seconds!")
+				//$('#crashWarning').modal('show')
+				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2][0], responseData.alert_data[0].alert_and_time[0][2][1])
 				crash.setLatLng(crashLoc)
 			}
 			
@@ -111,8 +116,10 @@ function pollServer() {
 			else if ((currentDanger < 3) && ((responseData.alert_data[0].alert_and_time[0][0] == 3) || (responseData.alert_data[0].alert_and_time[1][0] == 3) || (responseData.alert_data[0].alert_and_time[2][0] == 3))) {
 				currentDanger = 3
 				document.getElementById("crashWarningMessage").innerHTML = "Near Miss!"
-				$('#crashWarning').modal('show')
-				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2].pop())
+				document.getElementById("success").style.display = "block"
+				document.getElementById("success").innerHTML = "Near Miss!"
+				//$('#crashWarning').modal('show')
+				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2][0], responseData.alert_data[0].alert_and_time[0][2][1])
 				crash.setLatLng(crashLoc)
 			}
 			
@@ -120,11 +127,13 @@ function pollServer() {
 			else if ((currentDanger < 4) && ((responseData.alert_data[0].alert_and_time[0][0] == 4) || (responseData.alert_data[0].alert_and_time[1][0] == 4) || (responseData.alert_data[0].alert_and_time[2][0] == 4))) {
 				currentDanger = 4
 				document.getElementById("crashWarningMessage").innerHTML = "Yikes! A collision has occured!"
-				$('#crashWarning').modal('show')
-				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2].pop())
+				document.getElementById("success").style.display = "block"
+				document.getElementById("success").innerHTML = "Yikes! A collision has occured!"
+				//$('#crashWarning').modal('show')
+				crashLoc = new L.LatLng(responseData.alert_data[0].alert_and_time[0][2][0], responseData.alert_data[0].alert_and_time[0][2][1])
 				crash.setLatLng(crashLoc)
 			}
-			*/		
+
 			
 			
 			var vehicle0 = new L.LatLng(responseData.position_data[0].latitude, responseData.position_data[0].longitude)
@@ -164,7 +173,7 @@ function pollServer() {
 			
 			// New scenario
 			else {
-				crash.setLatLng([0, 0])
+				crash.setLatLng(origin)
 				currentDanger = 0
 				markerGroup.clearLayers()
 				mymap.removeControl(route)
