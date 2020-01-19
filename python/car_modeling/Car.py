@@ -401,6 +401,9 @@ class Car:
                 return [2, x_intersection_time_1, [lat, lon]]
             elif x_intersection_time_1 < 8/3600:
                 return [1, x_intersection_time_1, [lat, lon]]
+            else:
+                return [5, x_intersection_time_1]
+                
         else:
             print("\t\t ALL CLEAR")
             return [5, x_intersection_time_1]
