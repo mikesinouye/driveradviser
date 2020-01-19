@@ -162,80 +162,82 @@ class Car:
 
         # check if both intersection times are non-negative
         if (x_intersection_time_1 >= 0) and (y_intersection_time_1 >= 0) and not np.iscomplex(x_intersection_time_1) and not np.iscomplex(y_intersection_time_1):
-
+            x_collision_position = car1_x_eq[0] + car1_x_eq[1] * x_intersection_time_1 + 0.5 * car1_x_eq[ 2] * x_intersection_time_1 ** 2
+            y_collision_position = car1_y_eq[0] + car1_y_eq[1] * y_intersection_time_1 + 0.5 * car1_y_eq[2] * y_intersection_time_1 ** 2
             if np.abs(x_intersection_time_1 - y_intersection_time_1) < INTERSECTION_TIME_MARGIN or np.isinf(x_intersection_time_1) or np.isinf(y_intersection_time_1):
                 print("WARNING, collision will occur at time: {}".format(x_intersection_time_1))
                 if(x_intersection_time_1 < 1):
-                    # x_collision_position = car1_x_eq[0] + car1_x_eq[1] * x_intersection_time_1 + car1_x_eq[2] * x_intersection_time_1 ** 2
-                    # y_collision_position =
-                    return [4, x_intersection_time_1]
+                    return [4, x_intersection_time_1, [x_collision_position, y_collision_position]]
                 elif x_intersection_time_1 < 5:
-                    return [2, x_intersection_time_1]
+                    return [2, x_intersection_time_1, [x_collision_position, y_collision_position]]
                 elif x_intersection_time_1 < 8:
-                    return [1, x_intersection_time_1]
+                    return [1, x_intersection_time_1, [x_collision_position, y_collision_position]]
                 else:
                     return [5, x_intersection_time_1]
             elif np.abs(x_intersection_time_1 - y_intersection_time_1) < INTERSECTION_TIME_MARGIN*NEAR_MISS_MULTIPLIER:
                 print("WARNING, near miss will occur at time: {}".format(x_intersection_time_1))
                 if(x_intersection_time_1 < 1):
-                    return [3, x_intersection_time_1]
+                    return [3, x_intersection_time_1, [x_collision_position, y_collision_position]]
             else:
                 print("ALL CLEAR")
                 return [5, x_intersection_time_1]
         elif (x_intersection_time_1 >= 0) and (y_intersection_time_2 >= 0) and not np.iscomplex(x_intersection_time_1) and not np.iscomplex(y_intersection_time_2):
-
+            x_collision_position = car1_x_eq[0] + car1_x_eq[1] * x_intersection_time_1 + 0.5 * car1_x_eq[2] * x_intersection_time_1 ** 2
+            y_collision_position = car1_y_eq[0] + car1_y_eq[1] * y_intersection_time_2 + 0.5 * car1_y_eq[2] * y_intersection_time_2 ** 2
             if np.abs(x_intersection_time_1 - y_intersection_time_2) < INTERSECTION_TIME_MARGIN or np.isinf(x_intersection_time_1) or np.isinf(y_intersection_time_2):
                 print("WARNING, collision will occur at time: {}".format(x_intersection_time_1))
                 if(x_intersection_time_1 < 1):
-                    return [4, x_intersection_time_1]
+                    return [4, x_intersection_time_1, [x_collision_position, y_collision_position]]
                 elif x_intersection_time_1 < 5:
-                    return [2, x_intersection_time_1]
+                    return [2, x_intersection_time_1, [x_collision_position, y_collision_position]]
                 elif x_intersection_time_1 < 8:
-                    return [1, x_intersection_time_1]
+                    return [1, x_intersection_time_1, [x_collision_position, y_collision_position]]
                 else:
                     return [5, x_intersection_time_1]
             elif np.abs(x_intersection_time_1 - y_intersection_time_2) < INTERSECTION_TIME_MARGIN*NEAR_MISS_MULTIPLIER:
                 print("WARNING, near miss will occur at time: {}".format(x_intersection_time_1))
                 if(x_intersection_time_1 < 1):
-                    return [3, x_intersection_time_1]
+                    return [3, x_intersection_time_1, [x_collision_position, y_collision_position]]
             else:
                 print("ALL CLEAR")
                 return [5, x_intersection_time_1]
         elif (x_intersection_time_2 >= 0) and (y_intersection_time_1 >= 0) and not np.iscomplex(x_intersection_time_2) and not np.iscomplex(y_intersection_time_1):
-
+            x_collision_position = car1_x_eq[0] + car1_x_eq[1] * x_intersection_time_2 + 0.5 * car1_x_eq[2] * x_intersection_time_2 ** 2
+            y_collision_position = car1_y_eq[0] + car1_y_eq[1] * y_intersection_time_1 + 0.5 * car1_y_eq[2] * y_intersection_time_1 ** 2
             if np.abs(x_intersection_time_2 - y_intersection_time_1) < INTERSECTION_TIME_MARGIN or np.isinf(x_intersection_time_2) or np.isinf(y_intersection_time_1):
                 print("WARNING, collision will occur at time: {}".format(x_intersection_time_2))
                 if(x_intersection_time_2 < 1):
-                    return [4, x_intersection_time_2]
+                    return [4, x_intersection_time_2, [x_collision_position, y_collision_position]]
                 elif x_intersection_time_1 < 5:
-                    return [2, x_intersection_time_2]
+                    return [2, x_intersection_time_2, [x_collision_position, y_collision_position]]
                 elif x_intersection_time_1 < 8:
-                    return [1, x_intersection_time_2]
+                    return [1, x_intersection_time_2, [x_collision_position, y_collision_position]]
                 else:
                     return [5, x_intersection_time_2]
             elif np.abs(x_intersection_time_2 - y_intersection_time_1) < INTERSECTION_TIME_MARGIN*NEAR_MISS_MULTIPLIER:
                 print("WARNING, near miss will occur at time: {}".format(x_intersection_time_2))
                 if(x_intersection_time_2 < 1):
-                    return [3, x_intersection_time_2]
+                    return [3, x_intersection_time_2, [x_collision_position, y_collision_position]]
             else:
                 print("ALL CLEAR")
                 return [5, x_intersection_time_2]
         elif (x_intersection_time_2 >= 0) and (y_intersection_time_2 >= 0) and not np.iscomplex(x_intersection_time_2) and not np.iscomplex(y_intersection_time_2):
-
+            x_collision_position = car1_x_eq[0] + car1_x_eq[1] * x_intersection_time_2 + 0.5 * car1_x_eq[2] * x_intersection_time_2 ** 2
+            y_collision_position = car1_y_eq[0] + car1_y_eq[1] * y_intersection_time_2 + 0.5 * car1_y_eq[2] * y_intersection_time_2 ** 2
             if np.abs(x_intersection_time_2 - y_intersection_time_2) < INTERSECTION_TIME_MARGIN or np.isinf(x_intersection_time_2) or np.isinf(y_intersection_time_2):
                 print("WARNING, collision will occur at time: {}".format(x_intersection_time_2))
                 if(x_intersection_time_2 < 1):
-                    return [4, x_intersection_time_2]
+                    return [4, x_intersection_time_2, [x_collision_position, y_collision_position]]
                 elif x_intersection_time_1 < 5:
-                    return [2, x_intersection_time_2]
+                    return [2, x_intersection_time_2, [x_collision_position, y_collision_position]]
                 elif x_intersection_time_1 < 8:
-                    return [1, x_intersection_time_2]
+                    return [1, x_intersection_time_2, [x_collision_position, y_collision_position]]
                 else:
                     return [5, x_intersection_time_2]
             elif np.abs(x_intersection_time_2 - y_intersection_time_2) < INTERSECTION_TIME_MARGIN*NEAR_MISS_MULTIPLIER:
                 print("WARNING, near miss will occur at time: {}".format(x_intersection_time_2))
                 if(x_intersection_time_2 < 1):
-                    return [3, x_intersection_time_2]
+                    return [3, x_intersection_time_2, [x_collision_position, y_collision_position]]
             else:
                 print("ALL CLEAR")
                 return [5, x_intersection_time_2]
