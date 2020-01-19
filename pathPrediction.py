@@ -2,7 +2,7 @@ from subNats import *
 from queue import Queue
 import sys
 sys.path.append('python/car_modeling')
-from Car import *
+from python.car_modeling.Car import *
 """
 store single vehicle's data
 data with a timestamp

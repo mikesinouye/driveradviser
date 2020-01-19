@@ -1,6 +1,9 @@
 from subNats import *
 from pathPrediction import *
 from python.car_modeling.Car import *
+import sys
+
+x = int(sys.argv[1])
 
 ownPredictor = PathPredictor()
 target1Predictor = PathPredictor()
@@ -38,4 +41,4 @@ def dataReadyCallback(dataPoint):
             Car.predict_collision(ownPredictor.latestCar, target3Predictor.latestCar)
 
 if __name__ == "__main__":
-    initPosCollection(dataReadyCallback)
+    initPosCollection(dataReadyCallback, x)
