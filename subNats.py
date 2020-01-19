@@ -15,8 +15,10 @@ scenarios.append("multiple-scenarios-2")
 scenarios.append("multiple-scenarios-3")
 scenarios.append("new-scenarios-1")
 scenarios.append("INSERT_STREAM_HERE!")
+curr_scenario = 0
 
-def alert_json(data, alertID, region):
+def alert_json(data, alertID, region, scenario):
+    global curr_scenario
     print("Current Scenario: " + str(curr_scenario))
     return ({"alarmId": "placeholder",
              "streamId": scenarios[curr_scenario],
@@ -78,7 +80,8 @@ class DataPoints:
 		})
 
 
-async def run(loop, dataAddedCallback, curr_scenario):
+async def run(loop, dataAddedCallback, scenario):
+    global curr_scenario
     nc = NATS()
     async def error_cb(e):
         print("error:", e)
@@ -92,6 +95,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
     messages_received = 0
     positionList = []
     async def message_handler(msg):
+        global curr_scenario
         future_list = []
         alert_list = []
         # file = open("pos_data.txt", "a")
@@ -118,9 +122,9 @@ async def run(loop, dataAddedCallback, curr_scenario):
         # car1.predict_collision(car1, car2)
         nonlocal messages_received
         messages_received += 1
-        if messages_received % 15 == 0:
-            x = alert_json(newdata, alert_list[0][0], 1) #TODO: change 1 to a different region
-            p = requests.post(url="https://hackaz.modularminingcloud.com/api/Alert", json=x)
+        # if messages_received % 15 == 0:
+        x = alert_json(newdata, alert_list[0][0], 1, curr_scenario) #TODO: change 1 to a different region
+        p = requests.post(url="https://hackaz.modularminingcloud.com/api/Alert", json=x)
             #print("posted")
         print(messages_received)
         print(positionModel)
@@ -136,8 +140,8 @@ async def run(loop, dataAddedCallback, curr_scenario):
 
 def initPosCollection(dataAddedCallback, x):
     debug_mode = True
+    global curr_scenario 
     curr_scenario = -1
-
     curr_scenario = x
     loop = asyncio.get_event_loop()
     loop.set_debug(True)
