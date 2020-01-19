@@ -14,25 +14,14 @@ class DataPoints:
         self.positionModel = positionmodel
         self.timestamp = timestamp
     def string_json(self):
-        return ('{"timestamp": %s,\n "position_data": [\n\t{\n\t\t"latitude": %f,\n\t\t"longitude": %f,\n\t\t"altitude": %f,\n\t\t'
-                '"heading": %f,\n\t\t'
-                '"velocity": %f\n\t},\n\t{\n\t\t"latitude": %f,\n\t\t"longitude": %f,\n\t\t"altitude": %f,\n\t\t"heading": %f,\n\t\t'
-                '"velocity": %f\n\t}, \n\t'
-                '{\n\t\t"latitude": %f,\n\t\t"longitude": %f,\n\t\t"altitude": %f,\n\t\t"heading": %f,\n\t\t"velocity": %f}, \n\t'
-                '{\n\t\t"latitude": %f, \n\t\t'
-                '"longitude": %f,\n\t\t"altitude": %f,\n\t\t"heading": %f,\n\t\t"velocity": %f\n\t}\n\t]\n}'
-                %  (self.timestamp, self.positionModel.OwnPosition.Latitude, self.positionModel.OwnPosition.Longitude,
-                    self.positionModel.OwnPosition.Altitude, self.positionModel.OwnPosition.Heading,
-                    self.positionModel.OwnPosition.Velocity, self.positionModel.Target1Position.Latitude,
-                    self.positionModel.Target1Position.Longitude, self.positionModel.Target1Position.Altitude,
-                    self.positionModel.Target1Position.Heading, self.positionModel.Target1Position.Velocity,
-                    self.positionModel.Target2Position.Latitude,
-                    self.positionModel.Target2Position.Longitude, self.positionModel.Target2Position.Altitude,
-                    self.positionModel.Target2Position.Heading, self.positionModel.Target2Position.Velocity,
-                    self.positionModel.Target3Position.Latitude,
-                    self.positionModel.Target3Position.Longitude, self.positionModel.Target3Position.Altitude,
-                    self.positionModel.Target3Position.Heading, self.positionModel.Target3Position.Velocity,
-                    ))
+        return ({"timestamp": self.timestamp,
+		"position_data": [
+			{"latitude": self.positionModel.OwnPosition.Latitude, "longitude": self.positionModel.OwnPosition.Longitude, "altitude": self.positionModel.OwnPosition.Altitude,"heading": self.positionModel.OwnPosition.Altitude, "velocity": self.positionModel.OwnPosition.Velocity},
+			{"latitude": self.positionModel.Target1Position.Latitude,"longitude": self.positionModel.Target1Position.Longitude,"altitude": self.positionModel.Target1Position.Altitude,"heading": self.positionModel.Target1Position.Heading, "velocity": self.positionModel.Target1Position.Velocity}, 
+			{"latitude": self.positionModel.Target2Position.Latitude,"longitude": self.positionModel.Target2Position.Longitude,"altitude": self.positionModel.Target2Position.Altitude,"heading": self.positionModel.Target2Position.Heading, "velocity": self.positionModel.Target2Position.Velocity}, 
+			{"latitude": self.positionModel.Target3Position.Latitude,"longitude": self.positionModel.Target3Position.Longitude,"altitude": self.positionModel.Target3Position.Altitude,"heading": self.positionModel.Target3Position.Heading, "velocity": self.positionModel.Target3Position.Velocity}
+		]
+		})
 
 async def run(loop, dataAddedCallback):
     nc = NATS()
@@ -40,8 +29,8 @@ async def run(loop, dataAddedCallback):
     async def error_cb(e):
         print("error:", e)
 
-    await nc.connect("nats://hackaz.modularminingcloud.com:4222 ",
-                     user_credentials='./hack.creds', #hack.creds should probably be gitignored from the repo
+    await nc.connect("nats://hackaz.modularminingcloud.com:4222",
+                     user_credentials='../hack.creds', #hack.creds should probably be gitignored from the repo
                      error_cb=error_cb,
                      io_loop=loop,
                      )
@@ -73,8 +62,7 @@ async def run(loop, dataAddedCallback):
         car1.predict_collision(car1,car2)
         nonlocal messages_received
         messages_received += 1
-        print(newdata.string_json())
-        requests.post(url="localhost:9190/data", data=newdata.string_json())
+        r = requests.post(url="http://localhost:9190/data", json=newdata.string_json())
         # print(messages_received)
 
 
