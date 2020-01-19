@@ -56,7 +56,7 @@ class DataPoints:
     def __init__(self, positionmodel, timestamp):
         self.positionModel = positionmodel
         self.timestamp = timestamp
-    def string_json(self, return_list):
+    def string_json(self, return_list, alert_list):
         return ({"timestamp": self.timestamp,
 		"position_data": [
 			{"latitude": self.positionModel.OwnPosition.Latitude, "longitude": self.positionModel.OwnPosition.Longitude, "altitude": self.positionModel.OwnPosition.Altitude,"heading": self.positionModel.OwnPosition.Heading, "velocity": self.positionModel.OwnPosition.Velocity},
@@ -65,7 +65,13 @@ class DataPoints:
 			{"latitude": self.positionModel.Target3Position.Latitude,"longitude": self.positionModel.Target3Position.Longitude,"altitude": self.positionModel.Target3Position.Altitude,"heading": self.positionModel.Target3Position.Heading, "velocity": self.positionModel.Target3Position.Velocity}
 		],
         "prediction_data": [
-            {"coordinates": return_list
+            {
+                "coordinates": return_list
+            }
+        ],
+        "alert_data": [
+            {
+                "alert_and_time": alert_list
             }
         ]
 		})
@@ -77,7 +83,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
         print("error:", e)
     print("Current Scenario: " + str(curr_scenario))
     await nc.connect("nats://hackaz.modularminingcloud.com:4222",
-                     user_credentials='../hack.creds', #hack.creds should probably be gitignored from the repo
+                     user_credentials='./hack.creds', #hack.creds should probably be gitignored from the repo
                      error_cb=error_cb,
                      io_loop=loop,
                      )
@@ -86,6 +92,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
     positionList = []
     async def message_handler(msg):
         future_list = []
+        alert_list = []
         # file = open("pos_data.txt", "a")
         positionModel = positionModel_pb2.State()
         positionModel.ParseFromString(msg.data)
@@ -98,7 +105,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
         # file.write("&\n")
         # file.close()
         newdata = DataPoints(positionModel, timestamp)
-        future_list = dataAddedCallback(newdata)
+        future_list, alert_list = dataAddedCallback(newdata)
         positionList.append(newdata)
         # outfile = open("pos_data_json.txt", "w")
         # outfile.write(DataPoints(positionModel, timestamp).to_json())
@@ -116,7 +123,7 @@ async def run(loop, dataAddedCallback, curr_scenario):
             #print("posted")
         print(messages_received)
         print(positionModel)
-        r = requests.post(url="http://localhost:9190/data", json=newdata.string_json(future_list))
+        r = requests.post(url="http://localhost:9190/data", json=newdata.string_json(future_list, alert_list))
         #print(messages_received)
         print(r.text)
 
