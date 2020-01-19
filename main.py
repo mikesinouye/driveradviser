@@ -31,5 +31,13 @@ def dataReadyCallback(dataPoint):
     else:
         target3Predictor.hasPosData = False
 
+    if(ownPredictor.hasPosData):
+        if(target1Predictor.hasPosData):
+            Car.predict_collisions(ownPredictor.latestCar, target1Predictor.latestCar)
+        if(target2Predictor.hasPosData):
+            Car.predict_collisions(ownPredictor.latestCar, target2Predictor.latestCar)
+        if(target3Predictor.hasPosData):
+            Car.predict_collisions(ownPredictor.latestCar, target3Predictor.latestCar)
+
 if __name__ == "__main__":
     initPosCollection(dataReadyCallback)

@@ -38,3 +38,5 @@ pip install:
 - nkeys
 - protobuf
 - python3-protobuf
+- geopy
+- numpy
