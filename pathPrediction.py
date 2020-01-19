@@ -1,8 +1,9 @@
 from subNats import *
-from queue import Queue
+from geopy import distance
 import sys
 sys.path.append('python/car_modeling')
 from Car import *
+import math
 """
 store single vehicle's data
 data with a timestamp
@@ -26,7 +27,7 @@ class PathPredictor:
         self.predictions = list()
         self.latestTime = 0
         self.timeRecordLength = 8
-        self.latestCar = Car(0,0,0,0)
+        self.latestCar = Car(0,0,0,0) #TODO: make this None and handle elsewhere
 
     def predictParams(self):
         # just return avg velocity, acceleration for now
@@ -65,7 +66,7 @@ class PathPredictor:
         self.latestCar = newPos.car
         self.latestTime = timeStamp
 
-    def predictPath(self):
+    def predictPath(self, maxTime, resolution):
         """
         - Predict path based off past path change.
         - Treat each datapoint as vector. compute change in angle,
@@ -80,5 +81,45 @@ class PathPredictor:
         - returns predicted acceleration, velocity
         - clears old timestamps if found
         """
-        pass
+        origin = (32.08595, -109.512)
+        miles_per_km = 0.621371
+        earth_radius = 3960.0
+        degrees_to_radians = math.pi / 180.0
+        radians_to_degrees = 180.0 / math.pi
 
+        def change_in_latitude(miles):
+            "Given a distance north, return the change in latitude."
+            return (miles / earth_radius) * radians_to_degrees
+
+        def change_in_longitude(latitude, miles):
+            "Given a latitude and a distance west, return the change in longitude."
+            # Find the radius of a circle around the earth at given latitude.
+            r = earth_radius * math.cos(latitude * degrees_to_radians)
+            return (miles / r) * radians_to_degrees
+
+        """
+        origin = (32.08595, -109.512)
+        if latitude < 32.08595:
+            self.y_position = -(distance.distance(origin, (latitude, -109.512)).km)
+        else:
+            self.y_position = (distance.distance(origin, (latitude, -109.512)).km)
+        if longitude < -109.512:
+            self.x_position = -(distance.distance(origin, (32.08595, longitude)).km)
+        else:
+            self.x_position = distance.distance(origin, (32.08595, longitude)).km
+        """
+        pointList = list()
+        for t in np.linspace(0, maxTime, resolution):
+            #find x,y at time based off of parametric equation
+            x_eq, y_eq = self.latestCar.calculate_parametric_equations()
+            x = x_eq[0] + x_eq[1]*t + 0.5*x_eq[2]*t*t
+            y = y_eq[0] + y_eq[1]*t + 0.5*y_eq[2]*t*t
+            #convert back to lat/lon
+            d_lat = change_in_latitude(y*miles_per_km)
+            lat = d_lat + origin[0]
+            d_lon = change_in_longitude(lat, x*miles_per_km)
+            lon = d_lon + origin[1]
+
+            pointList.append((lat, lon))
+
+        return pointList
